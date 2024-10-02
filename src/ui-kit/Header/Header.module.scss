@@ -1,0 +1,50 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: max-content;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 1184px;
+  width: 100%;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  margin-left: 64px;
+
+  &__link {
+    line-height: 24px;
+    font-size: 18px;
+    color: var(--text-primary);
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s linear;
+
+    &:hover {
+      color: var(--text-accent);
+    }
+
+    &_disabled {
+      color: var(--text-tertiary);
+      &:hover {
+        color: var(--text-tertiary);
+      }
+    }
+  }
+}
