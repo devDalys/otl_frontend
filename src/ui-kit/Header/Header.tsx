@@ -1,6 +1,8 @@
 'use client';
 
 import styles from './Header.module.scss';
+import {Badge} from '@nextui-org/badge';
+import {Tooltip} from '@nextui-org/tooltip';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,9 +20,9 @@ export const Header = ({links}: HeaderProps) => {
           <Image src={logo.src} alt="One Time Link" fill />
         </Link>
         <nav className={styles.nav}>
-          {links.map(({disabled, text, url}, index) =>
+          {links.map(({disabled, text, url}) =>
             !disabled ? (
-              <Link className={styles.nav__link} href={url}>
+              <Link key={url} className={styles.nav__link} href={url}>
                 {text}
               </Link>
             ) : (
@@ -29,8 +31,17 @@ export const Header = ({links}: HeaderProps) => {
                   styles.nav__link,
                   styles.nav__link_disabled,
                 )}
+                key={text}
               >
-                {text}
+                <Tooltip
+                  content="Скоро"
+                  showArrow
+                  color="foreground"
+                  placement="right"
+                  closeDelay={200}
+                >
+                  {text}
+                </Tooltip>
               </span>
             ),
           )}
