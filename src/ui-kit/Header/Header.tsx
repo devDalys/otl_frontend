@@ -1,18 +1,18 @@
 'use client';
 
 import styles from './Header.module.scss';
-import {Badge} from '@nextui-org/badge';
-import {Tooltip} from '@nextui-org/tooltip';
+import {LanguageSwitcher} from '@/ui-kit/LanguageSwitcher/LanguageSwitcher';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from 'public/icons/logo.svg';
+import logo from 'public/images/Logo.webp';
 
 export type HeaderProps = {
   links: Array<{url: string; text: string; disabled?: boolean}>;
+  loginButtonText: string;
 };
 
-export const Header = ({links}: HeaderProps) => {
+export const Header = ({links, loginButtonText}: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -33,19 +33,17 @@ export const Header = ({links}: HeaderProps) => {
                 )}
                 key={text}
               >
-                <Tooltip
-                  content="Скоро"
-                  showArrow
-                  color="foreground"
-                  placement="right"
-                  closeDelay={200}
-                >
-                  {text}
-                </Tooltip>
+                {text}
               </span>
             ),
           )}
         </nav>
+        <div className={styles.actions}>
+          <LanguageSwitcher />
+          <Link href="/" className={styles.loginButton}>
+            {loginButtonText}
+          </Link>
+        </div>
       </div>
     </header>
   );

@@ -33,16 +33,22 @@ body {
   background: var(--background);
   min-height: 100vh;
   height: 100%;
-  font-family: var(--gilroy-font);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--gilroy-font);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@mixin breakpoint-to($width) {
+  @media screen and (max-width: ($width - 1)) {
+    @content;
+  }
 }

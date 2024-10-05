@@ -1,9 +1,13 @@
+@import "@/app/mixins";
+
 .header {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   height: max-content;
+  padding: 0 20px;
+
 }
 
 .content {
@@ -13,6 +17,10 @@
   padding: 16px 0;
   display: flex;
   align-items: center;
+  @include breakpoint-to(1024px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .logo {
@@ -23,8 +31,12 @@
 
 .nav {
   display: grid;
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: repeat(4, max-content);
+  grid-gap: 8px;
   margin-left: 64px;
+  @include breakpoint-to(1024px) {
+    margin-left: unset;
+  }
 
   &__link {
     line-height: 24px;
@@ -32,10 +44,14 @@
     color: var(--text-primary);
     font-weight: 500;
     display: flex;
+    padding: 8px 40px;
     justify-content: center;
     cursor: pointer;
     transition: color 0.2s linear;
     position: relative;
+    @include breakpoint-to(1024px){
+      padding: 8px 10px;
+    }
 
     &:hover {
       color: var(--text-accent);
@@ -43,9 +59,34 @@
 
     &_disabled {
       color: var(--text-tertiary);
+
       &:hover {
         color: var(--text-tertiary);
       }
     }
+  }
+}
+
+.loginButton {
+  border-radius: 12px;
+  background: var(--surface-tertiary);
+  font-size: 18px;
+  border: 2px solid var(--surface-input);
+  line-height: 24px;
+  color: var(--text-primary);
+  padding: 8px 16px;
+  transition: background-color .2s linear;
+  font-weight: 500;
+  margin-left: 24px;
+
+  &:hover {
+    background: var(--surface-input);
+  }
+}
+
+.actions {
+  margin-left: auto;
+  @include breakpoint-to(1024px) {
+    margin-left: unset;
   }
 }

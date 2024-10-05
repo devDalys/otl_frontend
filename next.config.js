@@ -1,4 +1,3 @@
-const {nextui} = require('@nextui-org/theme');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {

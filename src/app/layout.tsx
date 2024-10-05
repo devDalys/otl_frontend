@@ -1,6 +1,5 @@
 import './globals.scss';
-import './tailwind.css';
-import {NextUIProvider} from '@nextui-org/system';
+import type {Metadata} from 'next';
 import localFont from 'next/font/local';
 
 const Gilroy = localFont({
@@ -22,6 +21,13 @@ const Gilroy = localFont({
   variable: '--gilroy-font',
 });
 
+export const metadata: Metadata = {
+  icons: {
+    icon: '/images/Logo.png',
+    apple: '/images/Logo.png',
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,9 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${Gilroy.variable}`}>
-        <NextUIProvider>{children}</NextUIProvider>
-      </body>
+      <body className={`${Gilroy.variable}`}>{children}</body>
     </html>
   );
 }
