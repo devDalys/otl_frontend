@@ -2,8 +2,7 @@ import {Header} from '@/ui-kit/Header/Header';
 import type {Metadata} from 'next';
 
 export const metadata: Metadata = {
-  title:
-    'One Time Link - одноразовые ссылки с настройкой срока действия и паролем',
+  title: 'One Time Link - одноразовые ссылки с паролем',
   description: 'Генератор одноразовых ссылок',
 };
 

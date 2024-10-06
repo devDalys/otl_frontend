@@ -1,0 +1,28 @@
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  border: none;
+  cursor: pointer;
+  transition: background-color .2s linear;
+
+    &.xl{
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    &.accent{
+      background: var(--surface-accent);
+      color: var(--text-constant);
+      &:hover{
+        background: #6f50fb;
+      }
+    }
+    &:disabled{
+      filter: grayscale(1);
+    }
+
+}

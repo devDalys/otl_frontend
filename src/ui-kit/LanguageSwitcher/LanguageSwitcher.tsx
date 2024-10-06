@@ -1,6 +1,5 @@
 import styles from './LanguageSwitcher.module.scss';
 import * as Select from '@radix-ui/react-select';
-import classnames from 'classnames';
 import React from 'react';
 
 const languages = [
@@ -11,7 +10,7 @@ const languages = [
 export const LanguageSwitcher = () => {
   return (
     <Select.Root>
-      <Select.Trigger className={styles.select} aria-label="language">
+      <Select.Trigger className={styles.select} aria-label="Выбор языка">
         <Select.Value placeholder="RU" />
       </Select.Trigger>
       <Select.Portal>
@@ -32,17 +31,3 @@ export const LanguageSwitcher = () => {
     </Select.Root>
   );
 };
-
-const SelectItem = React.forwardRef(
-  ({children, className, ...props}, forwardedRef) => {
-    return (
-      <Select.Item
-        className={classnames(styles.Item, className)}
-        {...props}
-        ref={forwardedRef}
-      >
-        <Select.ItemText>{children}</Select.ItemText>
-      </Select.Item>
-    );
-  },
-);

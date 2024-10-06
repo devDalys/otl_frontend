@@ -5,17 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c18b784-112e-4361-be63-8dbf22aa4307" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/ru/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/tailwind.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/page_components/landing_page/components/Creator/Creator.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/page_components/landing_page/components/Creator/Creator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/page_components/landing_page/components/CreatorForm/CreatorForm.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/page_components/landing_page/components/CreatorForm/CreatorForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Button/Button.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Button/Button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Input/Input.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Input/Input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Select/Select.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Select/Select.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Textarea/Textarea.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui-kit/Textarea/Textarea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localization/ru/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/localization/ru/main.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ru/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui-kit/Badge/Badge.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/Badge/Badge.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ru/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ru/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ru/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ru/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page_components/landing_page/LandingPage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/page_components/landing_page/LandingPage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page_components/landing_page/LandingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/page_components/landing_page/LandingPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui-kit/Header/Header.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/Header/Header.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui-kit/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui-kit/LanguageSwitcher/LanguageSwitcher.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/LanguageSwitcher/LanguageSwitcher.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui-kit/LanguageSwitcher/LanguageSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/LanguageSwitcher/LanguageSwitcher.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +64,11 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
     "npm.dev.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "E:\\pets\\otl_frontend\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "E:\\pets\\otl_frontend\\node_modules\\typescript\\lib"
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -64,7 +79,17 @@
       <recent name="E:\pets\otl_frontend" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -78,6 +103,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>

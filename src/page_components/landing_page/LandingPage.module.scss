@@ -8,8 +8,8 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-content: center;
   min-height: 640px;
+  overflow: hidden;
 }
 
 .titles{
@@ -17,6 +17,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  justify-content: center;
   align-items: center;
 }
 
@@ -26,7 +27,7 @@
   line-height: 42px;
   font-size: 40px;
   text-align: center;
-  max-width: 70%;
+  white-space: pre-line;
 }
 
 .h2{
@@ -34,8 +35,8 @@
   font-size: 24px;
   line-height: 30px;
   font-weight: 700;
-  max-width: 70%;
   margin: 40px 0;
   text-align: center;
+  white-space: pre-line;
 
 }

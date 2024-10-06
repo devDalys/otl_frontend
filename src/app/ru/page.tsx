@@ -3,5 +3,5 @@ import {getDictionary} from '@/utils/getDictionary';
 
 export default async function Home() {
   const locale = await getDictionary('ru', 'main');
-  return <LandingPage />;
+  return <LandingPage h1={locale.title} h2={locale.subtitle} />;
 }

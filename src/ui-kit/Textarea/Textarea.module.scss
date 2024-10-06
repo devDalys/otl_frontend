@@ -1,0 +1,77 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alias,.counter{
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.textarea{
+  resize: none;
+  border: 1px solid var(--stroke-primary);
+  border-radius: 8px;
+  background: var(--surface-input);
+  min-height: 140px;
+  margin-top: 6px;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 20px;
+  outline: none;
+  transition: border-color .2s linear;
+  z-index: 1;
+  &.error{
+    border-color: var(--surface-negative);
+  }
+  &::placeholder{
+    color: var(--text-tertiary);
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &::-webkit-scrollbar{
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track{
+    background: var(--surface-input); /* Цвет фона трека скроллбара */
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: var(--surface-primary); /* Цвет ползунка скроллбара */
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  &:focus{
+    border-color: var(--stroke-accent);
+  }
+}
+
+.errorMessage{
+  position: absolute;
+  color: var(--text-negative);
+  font-size: 14px;
+  bottom: 0;
+  animation: animation .2s linear forwards;
+}
+
+@keyframes animation {
+  from {
+    bottom: 20px;
+  }
+  to {
+    bottom: 0;
+  }
+}

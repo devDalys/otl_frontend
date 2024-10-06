@@ -1,0 +1,46 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.input {
+  border: 1px solid var(--stroke-primary);
+  border-radius: 8px;
+  background: var(--surface-input);
+  margin-top: 6px;
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 20px;
+  outline: none;
+  transition: border-color .2s linear;
+
+  &.error {
+    border-color: var(--surface-negative);
+  }
+
+  &::placeholder {
+    color: var(--text-tertiary);
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &:focus{
+    border-color: var(--stroke-accent);
+  }
+}
+
+.alias{
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.errorMessage{
+  position: absolute;
+  color: var(--text-negative);
+  font-size: 14px;
+  bottom: 0;
+}

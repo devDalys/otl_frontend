@@ -7,6 +7,8 @@
   left: 0;
   height: max-content;
   padding: 0 20px;
+  z-index: 2;
+  background: var(--surface-primary);
 
 }
 
@@ -71,7 +73,7 @@
   border-radius: 12px;
   background: var(--surface-tertiary);
   font-size: 18px;
-  border: 2px solid var(--surface-input);
+  border: 1px solid var(--stroke-primary);
   line-height: 24px;
   color: var(--text-primary);
   padding: 8px 16px;
@@ -80,7 +82,7 @@
   margin-left: 24px;
 
   &:hover {
-    background: var(--surface-input);
+    background: var(--stroke-primary);
   }
 }
 

@@ -9,22 +9,24 @@
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 12px;
-  transition: background-color .2s linear;
-  border: 2px solid transparent;
+  transition: background-color .2s linear, border-color .2s linear;
+  border: 1px solid transparent;
   &[data-state='open']{
     background: var(--surface-tertiary);
     border-radius: 12px 12px 0 0;
-    border: 2px solid var(--surface-input);
+    border: 1px solid var(--stroke-primary);
     border-bottom-color: transparent;
   }
   &:hover{
+    border: 1px solid var(--stroke-primary);
     background: var(--surface-tertiary);
   }
 
   &__content{
+    z-index: 3;
     border-radius:0 0 12px 12px;
     overflow: hidden;
-    border: 2px solid var(--surface-input);
+    border: 1px solid var(--stroke-primary);
   }
 
   &__item{
@@ -38,7 +40,7 @@
     cursor: pointer;
     transition: background-color .2s linear;
     &:hover{
-      background: var(--surface-input);
+      background: var(--stroke-primary);
     }
   }
 }

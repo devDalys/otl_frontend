@@ -1,20 +1,20 @@
 import styles from './LandingPage.module.scss';
+import {Creator} from '@/page_components/landing_page/components/Creator/Creator';
 
-type Props = {};
+type Props = {
+  h1: string;
+  h2: string;
+};
 
-export const LandingPage = ({}: Props) => {
+export const LandingPage = ({h1, h2}: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.titles}>
-          <h1 className={styles.h1}>
-            Создайте одноразовые ссылки с настройкой срока действия и паролем
-          </h1>
-          <h2 className={styles.h2}>
-            Все данные защищены, поэтому делиться ими через One Time Link
-            безопасно. Но следите за тем, кому вы её отправляете.
-          </h2>
+          <h1 className={styles.h1}>{h1}</h1>
+          <h2 className={styles.h2}>{h2}</h2>
         </div>
+        <Creator />
       </div>
     </div>
   );
