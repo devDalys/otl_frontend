@@ -1,0 +1,18 @@
+  .react-datetime-picker__wrapper{
+    border: 1px solid var(--stroke-primary);
+    border-radius: 8px;
+    background: var(--surface-input);
+    margin-top: 6px;
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 20px;
+    outline: none;
+    transition: border-color 0.2s linear;
+    display: flex;
+    cursor: pointer;
+
+    &.error {
+      border-color: var(--surface-negative);
+    }
+  }

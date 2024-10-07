@@ -46,12 +46,12 @@
     width: 8px;
   }
   &::-webkit-scrollbar-track{
-    background: var(--surface-input); /* Цвет фона трека скроллбара */
-    border-radius: 4px;
+    background: transparent; /* Цвет фона трека скроллбара */
+    border-radius: 8px;
   }
   &::-webkit-scrollbar-thumb{
     background-color: var(--surface-primary); /* Цвет ползунка скроллбара */
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
   }
   &:focus{

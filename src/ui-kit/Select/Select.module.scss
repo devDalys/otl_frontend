@@ -1,13 +1,22 @@
-.alias{
+.alias {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
+  display: flex;
+  align-items: center;
 }
 
-.wrapper{
+.tooltip{
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}
+.wrapper {
   display: flex;
   flex-direction: column;
+  padding-bottom: 16px;
+  position: relative;
 }
 
 .select {
@@ -20,25 +29,29 @@
   font-size: 16px;
   line-height: 20px;
   outline: none;
-  transition: border-color .2s linear;
+  transition: border-color 0.2s linear;
   display: flex;
   cursor: pointer;
 
-  &[data-state='open']{
+  &.error {
+    border-color: var(--surface-negative);
+  }
+
+  &[data-state='open'] {
     border-color: var(--stroke-accent);
   }
 
-  &__content{
-    //width: var(--radix-select-trigger-width);
+  &__content {
+    padding: 6px;
     background: var(--surface-primary);
+    z-index: 2;
     outline: none;
     border-radius: 8px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
-    animation: OpeningAnimation .1s linear forwards;
-
+    animation: OpeningAnimation 0.1s linear forwards;
   }
 
-  &__item{
+  &__item {
     width: 100%;
     padding: 10px 12px;
     outline: none;
@@ -46,24 +59,29 @@
     color: var(--text-primary);
     font-size: 16px;
     line-height: 20px;
-    transition: background-color .2s linear, border-color .2s linear;
-    border: 1px solid transparent;
+    transition:
+      background-color 0.2s linear,
+      border-color 0.2s linear;
     border-radius: 8px;
 
-
-    &:hover{
+    &:hover {
       background: var(--surface-tertiary);
-      border-color:var(--stroke-accent);
     }
   }
 }
+.errorMessage {
+  position: absolute;
+  color: var(--text-negative);
+  font-size: 14px;
+  bottom: 0;
+}
 
 @keyframes OpeningAnimation {
-  from{
+  from {
     opacity: 0.9;
     transform: scale(0.9);
   }
-  to{
+  to {
     opacity: 1;
     transform: scale(1);
   }

@@ -10,37 +10,49 @@
   cursor: pointer;
   border-radius: 12px;
   transition: background-color .2s linear, border-color .2s linear;
-  border: 1px solid transparent;
+  border: none;
+
   &[data-state='open']{
-    background: var(--surface-tertiary);
-    border-radius: 12px 12px 0 0;
-    border: 1px solid var(--stroke-primary);
-    border-bottom-color: transparent;
+    background: var(--stroke-primary);
   }
   &:hover{
-    border: 1px solid var(--stroke-primary);
-    background: var(--surface-tertiary);
+    background: var(--stroke-primary);
   }
 
   &__content{
-    z-index: 3;
-    border-radius:0 0 12px 12px;
-    overflow: hidden;
-    border: 1px solid var(--stroke-primary);
+    z-index: 11;
+    padding: 6px;
+    background: var(--surface-primary);
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
+    animation: OpeningAnimation .1s linear forwards;
   }
 
   &__item{
+    width: 100%;
+    padding: 10px 12px;
     outline: none;
-    padding: 8px 16px;
-    background: var(--surface-tertiary);
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 18px;
-    line-height: 24px;
     cursor: pointer;
-    transition: background-color .2s linear;
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 20px;
+    transition: background-color .2s linear, border-color .2s linear;
+    border-radius: 8px;
+
+
     &:hover{
-      background: var(--stroke-primary);
+      background: var(--surface-tertiary);
     }
+  }
+}
+
+@keyframes OpeningAnimation {
+  from{
+    opacity: 0.9;
+    transform: scale(0.9);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1);
   }
 }

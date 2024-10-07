@@ -14,7 +14,11 @@ export const LanguageSwitcher = () => {
         <Select.Value placeholder="RU" />
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className={styles.select__content} position="popper">
+        <Select.Content
+          sideOffset={6}
+          className={styles.select__content}
+          position="popper"
+        >
           <Select.Viewport>
             {languages.map((language) => (
               <Select.Item

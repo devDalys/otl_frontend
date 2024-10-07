@@ -2,6 +2,7 @@
 
 import styles from './CreatorForm.module.scss';
 import {Button} from '@/ui-kit/Button/Button';
+import {DatePicker} from '@/ui-kit/DatePicker/DatePicker';
 import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
@@ -86,9 +87,11 @@ export const CreatorForm = () => {
             value={field.value}
             onValueChange={field.onChange}
             items={selectVariants}
+            tooltipText={`Ссылка удалится после достижения лимита.\nПри неограниченном количестве открытий нужно указать срок действия.`}
           />
         )}
       />
+      <DatePicker />
       <Button size="xl" color="accent" type="submit">
         Создать
       </Button>
