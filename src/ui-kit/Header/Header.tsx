@@ -5,7 +5,10 @@ import {LanguageSwitcher} from '@/ui-kit/LanguageSwitcher/LanguageSwitcher';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import CloseIcon from 'public/icons/Close.svg';
+import MenuIcon from 'public/icons/Menu.svg';
 import logo from 'public/images/Logo.webp';
+import {useState} from 'react';
 
 export type HeaderProps = {
   links: Array<{url: string; text: string; disabled?: boolean}>;
@@ -13,13 +16,21 @@ export type HeaderProps = {
 };
 
 export const Header = ({links, loginButtonText}: HeaderProps) => {
+  const [isOpened, setIsOpened] = useState(false);
+  const onSwitchState = () => {
+    setIsOpened((state) => !state);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.content}>
+        <div className={styles.menuIcon} onClick={onSwitchState}>
+          {isOpened ? <CloseIcon /> : <MenuIcon />}
+        </div>
         <Link href="/" className={styles.logo}>
           <Image src={logo.src} alt="One Time Link" fill />
         </Link>
-        <nav className={styles.nav}>
+        <nav className={classNames(styles.nav, {[styles.opened]: isOpened})}>
           {links.map(({disabled, text, url}) =>
             !disabled ? (
               <Link key={url} className={styles.nav__link} href={url}>

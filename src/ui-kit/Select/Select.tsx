@@ -22,6 +22,10 @@ export const Select = ({
   tooltipText,
   ...selectProps
 }: Props) => {
+  const defaultValueLabel = items?.find(
+    (item) => item?.value === defaultValue,
+  )?.label;
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.alias}>
@@ -42,7 +46,7 @@ export const Select = ({
           })}
           aria-label="Выбор языка"
         >
-          <SelectRadix.Value placeholder={defaultValue} />
+          <SelectRadix.Value placeholder={defaultValueLabel} />
         </SelectRadix.Trigger>
         <SelectRadix.Content
           className={styles.select__content}

@@ -2,7 +2,6 @@
 
 import styles from './CreatorForm.module.scss';
 import {Button} from '@/ui-kit/Button/Button';
-import {DatePicker} from '@/ui-kit/DatePicker/DatePicker';
 import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
@@ -17,13 +16,25 @@ type Form = {
   staleTime?: string;
 };
 
-const selectVariants = [
+const selectCountVariants = [
   {value: '1', label: '1'},
   {value: '2', label: '2'},
   {value: '3', label: '3'},
   {value: '4', label: '4'},
   {value: '5', label: '5'},
   {value: 'Infinite', label: 'Неограниченно'},
+];
+
+const selectStaleVariants = [
+  {value: '5m', label: '5 минут'},
+  {value: '30m', label: '30 минут'},
+  {value: '1h', label: '1 час'},
+  {value: '6h', label: '6 часов'},
+  {value: '12h', label: '12 часов'},
+  {value: '1d', label: '1 день'},
+  {value: '7d', label: '1 неделя'},
+  {value: '1m', label: '1 месяц'},
+  {value: '1y', label: '1 год'},
 ];
 
 export const CreatorForm = () => {
@@ -34,16 +45,16 @@ export const CreatorForm = () => {
     staleTime: yup.string().optional(),
   });
 
-  const {handleSubmit, control, formState} = useForm({
+  const {handleSubmit, control} = useForm({
     defaultValues: {
       content: '',
       countOpening: '1',
       password: '',
-      staleTime: '',
+      staleTime: '1d',
     },
     resolver: yupResolver(schema),
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
   });
   const onSubmit = (data: Form) => {
     console.log(data);
@@ -86,12 +97,25 @@ export const CreatorForm = () => {
             defaultValue={field.value}
             value={field.value}
             onValueChange={field.onChange}
-            items={selectVariants}
-            tooltipText={`Ссылка удалится после достижения лимита.\nПри неограниченном количестве открытий нужно указать срок действия.`}
+            items={selectCountVariants}
+            tooltipText={`Ссылка удалится после достижения лимита открытий.`}
           />
         )}
       />
-      <DatePicker />
+      <Controller
+        name="staleTime"
+        control={control}
+        render={({field: {ref, ...field}}) => (
+          <Select
+            alias="Время жизни"
+            defaultValue={field.value}
+            value={field.value}
+            onValueChange={field.onChange}
+            items={selectStaleVariants}
+            tooltipText={`После истечения срока ссылка перестанет открываться.`}
+          />
+        )}
+      />
       <Button size="xl" color="accent" type="submit">
         Создать
       </Button>
