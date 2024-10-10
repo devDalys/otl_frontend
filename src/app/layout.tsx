@@ -1,4 +1,5 @@
 import './globals.scss';
+import {YaMetric} from '@/scripts/YaMetric';
 import type {Metadata} from 'next';
 import localFont from 'next/font/local';
 
@@ -35,7 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${Gilroy.variable}`}>{children}</body>
+      <body className={`${Gilroy.variable}`}>
+        <YaMetric />
+
+        {children}
+      </body>
     </html>
   );
 }

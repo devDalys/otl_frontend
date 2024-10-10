@@ -1,3 +1,6 @@
+@import "@/app/mixins";
+
+
 .select{
   width: max-content;
   color: var(--text-primary);
@@ -19,6 +22,10 @@
     background: var(--stroke-primary);
   }
 
+  @include breakpoint-to(720px){
+    font-size: 16px;
+  }
+
   &__content{
     z-index: 11;
     padding: 6px;
@@ -34,7 +41,7 @@
     outline: none;
     cursor: pointer;
     color: var(--text-primary);
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
     transition: background-color .2s linear, border-color .2s linear;
     border-radius: 8px;
@@ -42,6 +49,9 @@
 
     &:hover{
       background: var(--surface-tertiary);
+    }
+    @include breakpoint-to(720px){
+      font-size: 16px;
     }
   }
 }

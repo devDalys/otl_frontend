@@ -17,11 +17,11 @@ type Form = {
 };
 
 const selectCountVariants = [
-  {value: '1', label: '1'},
-  {value: '2', label: '2'},
-  {value: '3', label: '3'},
-  {value: '4', label: '4'},
-  {value: '5', label: '5'},
+  {value: '1', label: '1 открытие'},
+  {value: '2', label: '2 открытия'},
+  {value: '3', label: '3 открытия'},
+  {value: '4', label: '4 открытия'},
+  {value: '5', label: '5 открытий'},
   {value: 'Infinite', label: 'Неограниченно'},
 ];
 

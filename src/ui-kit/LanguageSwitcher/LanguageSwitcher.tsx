@@ -1,17 +1,19 @@
 import styles from './LanguageSwitcher.module.scss';
 import * as Select from '@radix-ui/react-select';
-import React from 'react';
+import React, {useState} from 'react';
 
 const languages = [
-  {label: 'RU', value: 'RU'},
-  {label: 'EN', value: 'EN'},
+  {label: 'Русский', value: 'RU'},
+  {label: 'English', value: 'EN'},
 ];
 
 export const LanguageSwitcher = () => {
+  const [value, setValue] = useState('RU');
+
   return (
-    <Select.Root>
+    <Select.Root value={value} onValueChange={(value) => setValue(value)}>
       <Select.Trigger className={styles.select} aria-label="Выбор языка">
-        <Select.Value placeholder="RU" />
+        {value}
       </Select.Trigger>
       <Select.Portal>
         <Select.Content
