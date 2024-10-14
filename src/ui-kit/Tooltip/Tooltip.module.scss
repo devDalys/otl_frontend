@@ -26,6 +26,9 @@
   &[data-state="delayed-open"][data-side="left"] {
     animation-name: slideRightAndFade;
   }
+
+  z-index: 10;
+  max-width: calc(100vw - 20px);
 }
 
 .Arrow {

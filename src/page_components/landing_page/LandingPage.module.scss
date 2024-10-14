@@ -1,3 +1,5 @@
+@import "@/app/mixins";
+
 .wrapper{
   width: 100%;
   max-width: 1248px;
@@ -11,7 +13,11 @@
   grid-template-columns: 1fr 1fr;
   min-height: 640px;
   padding: 0 20px;
-
+  position: relative;
+  @include breakpoint-to(1024px){
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
 }
 
 .titles{
@@ -30,6 +36,10 @@
   font-size: 40px;
   text-align: center;
   white-space: pre-line;
+  @include breakpoint-to(720px){
+    font-size: 34px;
+    line-height: 32px;
+  }
 }
 
 .h2{
@@ -40,5 +50,9 @@
   margin: 40px 0;
   text-align: center;
   white-space: pre-line;
+  @include breakpoint-to(720px){
+    font-size: 18px;
+    line-height: 20px;
+  }
 
 }

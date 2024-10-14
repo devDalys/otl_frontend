@@ -1,11 +1,16 @@
+@import "@/app/mixins";
+
 .Root {
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0 2px 10px var(--black-a4);
   align-items: center;
   justify-content: center;
   height: auto;
+  @include breakpoint-to(1024px){
+    padding: 0 20px 20px;
+    z-index: 10;
+  }
 }
 
 .triggers {

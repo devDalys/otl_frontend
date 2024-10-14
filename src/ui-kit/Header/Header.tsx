@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './Header.module.scss';
+import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {LanguageSwitcher} from '@/ui-kit/LanguageSwitcher/LanguageSwitcher';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -20,6 +21,8 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
   const onSwitchState = () => {
     setIsOpened((state) => !state);
   };
+
+  const {showSnack} = useSnackbar();
 
   return (
     <header className={styles.header}>
@@ -43,6 +46,13 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
                   styles.nav__link_disabled,
                 )}
                 key={text}
+                onClick={() =>
+                  showSnack({
+                    title: 'В разработке',
+                    description:
+                      'Дайте нам знать, если вы ждете этот функционал',
+                  })
+                }
               >
                 {text}
               </span>

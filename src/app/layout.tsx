@@ -1,4 +1,5 @@
 import './globals.scss';
+import {GlobalProvider} from '@/providers/GlobalProvider';
 import {YaMetric} from '@/scripts/YaMetric';
 import type {Metadata} from 'next';
 import localFont from 'next/font/local';
@@ -38,8 +39,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={`${Gilroy.variable}`}>
         <YaMetric />
-
-        {children}
+        <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>
   );

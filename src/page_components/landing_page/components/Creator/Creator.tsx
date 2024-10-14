@@ -24,6 +24,7 @@ export const Creator = () => (
         Создание ссылки
       </Tabs.Trigger>
       <Tabs.Trigger
+        disabled
         className={styles.triggers__button}
         value={screens.history.name}
       >

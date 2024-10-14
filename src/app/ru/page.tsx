@@ -1,7 +1,6 @@
 import {LandingPage} from '@/page_components/landing_page/LandingPage';
-import {getDictionary} from '@/utils/getDictionary';
+import ruLocale from 'localization/ru/main.json';
 
 export default async function Home() {
-  const locale = await getDictionary('ru', 'main');
-  return <LandingPage h1={locale.title} h2={locale.subtitle} />;
+  return <LandingPage h1={ruLocale.title} h2={ruLocale.subtitle} />;
 }
