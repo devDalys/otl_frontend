@@ -2,7 +2,6 @@
 
 import styles from './Header.module.scss';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
-import {LanguageSwitcher} from '@/ui-kit/LanguageSwitcher/LanguageSwitcher';
 import {emitYmEvent} from '@/utils/ymEvent';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -25,6 +24,16 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
 
   const {showSnack} = useSnackbar();
 
+  const onClick = (text: string) => {
+    showSnack({
+      title: 'В разработке',
+      description: 'Нажмите на кнопку, если вы ждете этот функционал',
+      button: {
+        text: 'Жду!',
+        action: () => emitYmEvent('waitingContent', {button: text}),
+      },
+    });
+  };
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -47,14 +56,7 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
                   styles.nav__link_disabled,
                 )}
                 key={text}
-                onClick={() => {
-                  emitYmEvent('waitingContent', {button: text});
-                  showSnack({
-                    title: 'В разработке',
-                    description:
-                      'Свяжитесь с нами, если вы ждете этот функционал',
-                  });
-                }}
+                onClick={() => onClick(text)}
               >
                 {text}
               </span>
@@ -62,8 +64,11 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
           )}
         </nav>
         <div className={styles.actions}>
-          <LanguageSwitcher />
-          <Link href="/" className={styles.loginButton}>
+          <Link
+            href="/"
+            className={styles.loginButton}
+            onClick={() => onClick('Войти')}
+          >
             {loginButtonText}
           </Link>
         </div>

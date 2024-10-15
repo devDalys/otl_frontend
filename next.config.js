@@ -27,18 +27,6 @@ const nextConfig = {
 
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/ru',
-      },
-      {
-        source: '/:path*',
-        destination: '/ru/:path*',
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

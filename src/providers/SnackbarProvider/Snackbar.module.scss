@@ -21,7 +21,7 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
   padding: 15px;
   display: grid;
-  grid-template-areas: "title action" "description action";
+  grid-template-areas: "title title" "description action";
   grid-template-columns: auto max-content;
   column-gap: 15px;
   align-items: center;
@@ -69,4 +69,16 @@
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 18px;
+}
+
+.action{
+  grid-area: action;
+  background: var(--surface-accent);
+  color: var(--surface-primary);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-weight: 500;
 }

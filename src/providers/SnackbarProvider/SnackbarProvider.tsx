@@ -14,6 +14,10 @@ type TSnackbarElem = {
   title: string;
   description?: string;
   delay?: number;
+  button?: {
+    text: string;
+    action: () => void;
+  };
 };
 
 const SnackbarContext = React.createContext<TSnackbarContext>({
@@ -41,6 +45,7 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     title,
     id,
     delay = 3000,
+    button,
   }: TSnackbarElem & {id: string}) => {
     return (
       <Toast.Root
@@ -51,6 +56,19 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
         <Toast.Title className={styles.title}>{title}</Toast.Title>
         {description && (
           <span className={styles.description}>{description}</span>
+        )}
+        {button && (
+          <Toast.Action className={styles.Action} asChild altText={button.text}>
+            <button
+              onClick={() => {
+                button.action();
+                handleHide(id);
+              }}
+              className={styles.action}
+            >
+              {button.text}
+            </button>
+          </Toast.Action>
         )}
       </Toast.Root>
     );
