@@ -3,6 +3,7 @@
 import styles from './Header.module.scss';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {LanguageSwitcher} from '@/ui-kit/LanguageSwitcher/LanguageSwitcher';
+import {emitYmEvent} from '@/utils/ymEvent';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -46,13 +47,14 @@ export const Header = ({links, loginButtonText}: HeaderProps) => {
                   styles.nav__link_disabled,
                 )}
                 key={text}
-                onClick={() =>
+                onClick={() => {
+                  emitYmEvent('waitingContent', {button: text});
                   showSnack({
                     title: 'В разработке',
                     description:
-                      'Дайте нам знать, если вы ждете этот функционал',
-                  })
-                }
+                      'Свяжитесь с нами, если вы ждете этот функционал',
+                  });
+                }}
               >
                 {text}
               </span>
