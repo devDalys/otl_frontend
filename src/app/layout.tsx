@@ -1,6 +1,7 @@
 import './globals.scss';
 import {GlobalProvider} from '@/providers/GlobalProvider';
 import {YaMetric} from '@/scripts/YaMetric';
+import {Footer} from '@/ui-kit/Footer/Footer';
 import {Header} from '@/ui-kit/Header/Header';
 import type {Metadata} from 'next';
 import localFont from 'next/font/local';
@@ -33,13 +34,6 @@ export const metadata: Metadata = {
   },
 };
 
-const links = [
-  {url: '/', text: 'Главная'},
-  {url: '', text: 'Помощь', disabled: true},
-  {url: '', text: 'API', disabled: true},
-  {url: '', text: 'Личный кабинет', disabled: true},
-];
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,8 +44,9 @@ export default function RootLayout({
       <body className={`${Gilroy.variable}`}>
         <YaMetric />
         <GlobalProvider>
-          <Header links={links} loginButtonText="Войти" />
+          <Header />
           {children}
+          <Footer />
         </GlobalProvider>
       </body>
     </html>

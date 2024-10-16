@@ -1,142 +1,19 @@
 @import "@/app/mixins";
 
 .header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: max-content;
-  padding: 0 20px;
-  z-index: 100;
-  background: var(--surface-primary);
-
-}
-
-.content {
-  margin: 0 auto;
-  max-width: 1184px;
-  width: 100%;
-  padding: 16px 0;
   display: flex;
+  width: calc(100vw - var(--removed-body-scroll-bar-size));
+  height: max-content;
+  z-index: 100;
+  background: transparent;
   align-items: center;
-  justify-content: space-between;
-  @include breakpoint-to(1024px) {
-    width: 100%;
-    justify-content: space-between;
-  }
+  justify-content: center;
+  padding: 32px 0;
 }
 
 .logo {
+  display: flex;
   position: relative;
   width: 80px;
   height: 40px;
-  @include breakpoint-to(720px){
-    margin-left: 15px;
-    width: 60px;
-    height: 30px;
-  }
-}
-
-.nav {
-  display: grid;
-  grid-template-columns: repeat(4, max-content);
-  grid-gap: 8px;
-  margin-left: 64px;
-  @include breakpoint-to(1024px) {
-    margin-left: unset;
-  }
-
-  @include breakpoint-to(720px){
-    position: absolute;
-    background: var(--surface-primary);
-    top: 72px;
-    grid-template-columns: 1fr;
-    width: 100vw;
-    height: 100vh;
-    z-index: 11;
-    grid-template-rows: repeat(4, max-content);
-    transition: transform .2s linear;
-    transform: translateX(-100%);
-    left: 0;
-    grid-gap: 0;
-    padding-left: 20px;
-  }
-
-  &.opened{
-    @include breakpoint-to(720px){
-      transform: translateX(0);
-    }
-  }
-
-  &__link {
-    line-height: 24px;
-    font-size: 18px;
-    color: var(--text-primary);
-    font-weight: 500;
-    display: flex;
-    padding: 8px 40px;
-    justify-content: center;
-    cursor: pointer;
-    transition: color 0.2s linear;
-    position: relative;
-
-    &:hover {
-      color: var(--text-accent);
-    }
-
-    &_disabled {
-      color: var(--text-tertiary);
-
-      &:hover {
-        color: var(--text-tertiary);
-      }
-    }
-    @include breakpoint-to(1024px){
-      padding: 8px 10px;
-    }
-    @include breakpoint-to(720px){
-      justify-content: flex-start;
-      font-size: 16px;
-    }
-  }
-}
-
-.loginButton {
-  border-radius: 12px;
-  background: var(--surface-tertiary);
-  font-size: 18px;
-  border: 1px solid var(--stroke-primary);
-  line-height: 24px;
-  color: var(--text-primary);
-  padding: 8px 16px;
-  transition: background-color .2s linear;
-  font-weight: 500;
-  margin-left: 24px;
-
-  &:hover {
-    background: var(--stroke-primary);
-  }
-
-  @include breakpoint-to(720px){
-    font-size: 16px;
-  }
-}
-
-.actions {
-  @include breakpoint-to(720px){
-    margin-left: auto;
-  }
-}
-
-.menuIcon{
-  cursor: pointer;
-  display: flex;
-  svg{
-    height: 30px;
-    width: 30px;
-  }
-
-  @include breakpoint-from(720px){
-    display: none;
-  }
 }

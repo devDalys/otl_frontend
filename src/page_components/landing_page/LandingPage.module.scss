@@ -1,16 +1,18 @@
 @import "@/app/mixins";
 
 .wrapper{
-  width: 100%;
-  max-width: 1248px;
-  margin: 116px auto 0;
+  width: calc(100vw - var(--removed-body-scroll-bar-size));
+  margin: 32px 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .content{
-  margin-top: 44px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
   min-height: 640px;
   padding: 0 20px;
   position: relative;
@@ -37,22 +39,29 @@
   text-align: center;
   white-space: pre-line;
   @include breakpoint-to(720px){
-    font-size: 34px;
+    font-size: 32px;
+    line-height: 40px;
+  }
+  @include breakpoint-to(480px){
+    font-size: 28px;
     line-height: 32px;
   }
 }
 
 .h2{
   color: var(--text-secondary);
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 20px;
+  line-height: 24px;
   font-weight: 700;
-  margin: 40px 0;
+  margin-top: 24px;
   text-align: center;
   white-space: pre-line;
   @include breakpoint-to(720px){
     font-size: 18px;
-    line-height: 20px;
+    line-height: 24px;
   }
-
+  @include breakpoint-to(480px){
+    font-size: 18px;
+    line-height: 24px;
+  }
 }

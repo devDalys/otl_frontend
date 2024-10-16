@@ -5,6 +5,7 @@ import {CreatorForm} from '@/page_components/landing_page/components/CreatorForm
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {emitYmEvent} from '@/utils/ymEvent';
 import * as Tabs from '@radix-ui/react-tabs';
+import classNames from 'classnames';
 import React from 'react';
 
 export const Creator = ({}) => {
@@ -41,7 +42,7 @@ export const Creator = ({}) => {
           Создание ссылки
         </Tabs.Trigger>
         <div
-          className={styles.triggers__button}
+          className={classNames(styles.triggers__button, styles.soon)}
           // value={screens.history.name}
           onClick={() => onClick('История')}
         >
