@@ -16,7 +16,9 @@ export const Input = ({alias, errorMessage, ...inputProps}: Props) => {
         })}
         {...inputProps}
       />
-      <span className={styles.errorMessage}>{errorMessage}</span>
+      {errorMessage && (
+        <span className={styles.errorMessage}>{errorMessage}</span>
+      )}
     </div>
   );
 };

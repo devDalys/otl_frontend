@@ -16,6 +16,7 @@
   font-size: 16px;
   line-height: 20px;
   outline: none;
+  z-index: 1;
   transition: border-color .2s linear;
 
   &.error {
@@ -43,4 +44,14 @@
   color: var(--text-negative);
   font-size: 14px;
   bottom: 0;
+  animation: animation .2s linear forwards;
+}
+
+@keyframes animation {
+  from {
+    bottom: 20px;
+  }
+  to {
+    bottom: 0;
+  }
 }

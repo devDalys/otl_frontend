@@ -6,14 +6,14 @@ type Props = {
   color: 'accent';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({size, color, ...buttonProps}: Props) => {
+export const Button = ({size, color, className, ...buttonProps}: Props) => {
   return (
     <button
       className={classNames(
         styles.button,
         styles[size],
         styles[color],
-        buttonProps.className,
+        className,
       )}
       {...buttonProps}
     />
