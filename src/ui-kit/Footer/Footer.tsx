@@ -8,9 +8,9 @@ export const Footer = () => {
   const {createModal} = useModal();
   const onClick = () => {
     createModal({
-      title: 'Форма обратной связи',
+      title: 'Обратная связь',
       subtitle:
-        'Напишите нам, какой функционал вы ждете. Или оставьте нам отзыв по сервису.',
+        'Напишите нам, какой функционал вы ждете, или с какой проблемой столкнулись.',
       content: <HelpForm />,
     });
   };

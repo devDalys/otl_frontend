@@ -48,11 +48,13 @@
   &::-webkit-scrollbar-track{
     background: transparent; /* Цвет фона трека скроллбара */
     border-radius: 8px;
+    margin: 2px 0;
   }
   &::-webkit-scrollbar-thumb{
     background-color: var(--surface-primary); /* Цвет ползунка скроллбара */
     border-radius: 8px;
     cursor: pointer;
+
   }
   &:focus{
     border-color: var(--stroke-accent);

@@ -15,12 +15,16 @@ type Form = {
 
 export const HelpForm = () => {
   const schema = yup.object().shape({
-    name: yup.string().required('Обязательное поле'),
+    name: yup
+      .string()
+      .required('Обязательное поле')
+      .max(15, 'Максимальная длина поля: 15')
+      .min(2, 'Минимальная длина поля: 2'),
     content: yup
       .string()
       .required('Обязательное поле')
-      .max(2000, 'Превышена длина поля')
-      .min(1, 'Минимальная длина поля: 1'),
+      .max(2000, 'Максимальная длина поля: 2000')
+      .min(50, 'Минимальная длина поля: 50'),
     email: yup.string().email('Неверный формат почты'),
   });
 
@@ -57,7 +61,7 @@ export const HelpForm = () => {
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Textarea
             placeholder="Предлагаю сделать личный кабинет, чтобы я мог..."
-            alias="Содержимое"
+            alias="Обращение"
             maxLength={5000}
             errorMessage={error?.message}
             {...field}

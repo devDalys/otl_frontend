@@ -1,6 +1,19 @@
+@import "@/app/mixins";
+
+
 .form{
   display: grid;
   grid-gap: 12px;
   max-width: 500px;
   margin: 0 auto;
 }
+.selects{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  @include breakpoint-to(480px){
+    grid-template-columns: 1fr;
+  }
+}
+
+

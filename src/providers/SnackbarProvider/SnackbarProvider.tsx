@@ -84,7 +84,7 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
 
   return (
     <SnackbarContext.Provider value={{showSnack: showSnackbar}}>
-      <Toast.Provider swipeDirection="right">
+      <Toast.Provider swipeDirection="left">
         {Object.entries(snackbars).map(([key, elem]) => (
           <Fragment key={key}>{elem}</Fragment>
         ))}

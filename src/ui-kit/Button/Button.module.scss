@@ -1,4 +1,4 @@
-.button{
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,21 +8,56 @@
   border: none;
   cursor: pointer;
   transition: background-color .2s linear;
+  position: relative;
 
-    &.xl{
-      border-radius: 12px;
-      padding: 12px;
-    }
+  &.xl {
+    border-radius: 12px;
+    padding: 12px;
+  }
 
-    &.accent{
-      background: var(--surface-accent);
-      color: var(--text-constant);
-      &:hover{
-        background: #6f50fb;
-      }
-    }
-    &:disabled{
-      filter: grayscale(1);
-    }
+  &.accent {
+    background: var(--surface-accent);
+    color: var(--text-constant);
 
+    &:hover {
+      background: #6f50fb;
+    }
+  }
+
+  &:disabled {
+    opacity: .4;
+  }
+
+  &.isLoading{
+    opacity: .4;
+    pointer-events: none;
+  }
+}
+
+.children{
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.spinner {
+  position: absolute;
+  left: -30px;
+  width: 20px;
+  height: 20px;
+  border-top: 2px dot-dash var(--surface-secondary);
+  border-left: 2px solid transparent;
+  border-right: 2px dot-dash var(--surface-secondary);
+  border-bottom: 3px solid var(--surface-secondary);
+  border-radius: 50%;
+  animation: animation 1s linear infinite;
+}
+
+@keyframes animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -17,11 +17,11 @@ type Form = {
 };
 
 const selectCountVariants = [
-  {value: '1', label: '1 открытие'},
-  {value: '2', label: '2 открытия'},
-  {value: '3', label: '3 открытия'},
-  {value: '4', label: '4 открытия'},
-  {value: '5', label: '5 открытий'},
+  {value: '1', label: '1'},
+  {value: '2', label: '2'},
+  {value: '3', label: '3'},
+  {value: '4', label: '4'},
+  {value: '5', label: '5'},
   {value: 'Infinite', label: 'Неограниченно'},
 ];
 
@@ -39,9 +39,13 @@ const selectStaleVariants = [
 
 export const CreatorForm = () => {
   const schema = yup.object().shape({
-    content: yup.string().required('Обязательное поле').max(2000).min(1),
+    content: yup
+      .string()
+      .required('Обязательное поле')
+      .max(5000, 'Максимальная длина поля: 5000')
+      .min(3, 'Минимальная длина поля: 3'),
     countOpening: yup.string().required(),
-    password: yup.string().optional(),
+    password: yup.string().max(20, 'Максимальная длина поля: 20').optional(),
     staleTime: yup.string().optional(),
   });
 
@@ -88,34 +92,36 @@ export const CreatorForm = () => {
         )}
       />
 
-      <Controller
-        name="countOpening"
-        control={control}
-        render={({field: {ref, ...field}}) => (
-          <Select
-            alias="Количество открытий"
-            defaultValue={field.value}
-            value={field.value}
-            onValueChange={field.onChange}
-            items={selectCountVariants}
-            tooltipText={`Ссылка удалится после достижения лимита открытий.`}
-          />
-        )}
-      />
-      <Controller
-        name="staleTime"
-        control={control}
-        render={({field: {ref, ...field}}) => (
-          <Select
-            alias="Время жизни"
-            defaultValue={field.value}
-            value={field.value}
-            onValueChange={field.onChange}
-            items={selectStaleVariants}
-            tooltipText={`После истечения срока ссылка перестанет открываться.`}
-          />
-        )}
-      />
+      <div className={styles.selects}>
+        <Controller
+          name="countOpening"
+          control={control}
+          render={({field: {ref, ...field}}) => (
+            <Select
+              alias="Количество открытий"
+              defaultValue={field.value}
+              value={field.value}
+              onValueChange={field.onChange}
+              items={selectCountVariants}
+              tooltipText={`Ссылка удалится после достижения лимита открытий.`}
+            />
+          )}
+        />
+        <Controller
+          name="staleTime"
+          control={control}
+          render={({field: {ref, ...field}}) => (
+            <Select
+              alias="Время жизни"
+              defaultValue={field.value}
+              value={field.value}
+              onValueChange={field.onChange}
+              items={selectStaleVariants}
+              tooltipText={`После истечения срока ссылка перестанет открываться.`}
+            />
+          )}
+        />
+      </div>
       <Button size="xl" color="accent" type="submit">
         Создать
       </Button>
