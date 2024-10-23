@@ -1,0 +1,26 @@
+.wrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notFound{
+  color: var(--surface-accent);
+  font-weight: 700;
+  font-size: 56px;
+}
+
+.notFoundText{
+  margin-top: 8px;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.button{
+  margin-top: 16px;
+}

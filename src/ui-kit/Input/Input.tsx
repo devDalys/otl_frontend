@@ -3,15 +3,20 @@ import classNames from 'classnames';
 
 type Props = {
   errorMessage?: string;
-  alias: string;
+  alias?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = ({alias, errorMessage, ...inputProps}: Props) => {
+export const Input = ({
+  alias,
+  errorMessage,
+  className,
+  ...inputProps
+}: Props) => {
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.alias}>{alias}</h3>
       <input
-        className={classNames(styles.input, {
+        className={classNames(styles.input, className, {
           [styles.error]: errorMessage?.length,
         })}
         {...inputProps}

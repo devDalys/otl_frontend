@@ -1,12 +1,17 @@
 'use client';
 
 import styles from './CreatorForm.module.scss';
+import {api} from '@/api/api';
+import {SuccessCreate} from '@/page_components/landing_page/components/SuccessCreate/SuccessCreate';
+import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
+import {useMutation} from 'react-query';
 import * as yup from 'yup';
 
 type Form = {
@@ -16,13 +21,22 @@ type Form = {
   staleTime?: string;
 };
 
+type SuccessResponse = {
+  body: {
+    href: string;
+  };
+};
+
 const selectCountVariants = [
   {value: '1', label: '1'},
   {value: '2', label: '2'},
   {value: '3', label: '3'},
   {value: '4', label: '4'},
   {value: '5', label: '5'},
-  {value: 'Infinite', label: 'Неограниченно'},
+  {value: '10', label: '10'},
+  {value: '50', label: '50'},
+  {value: '100', label: '100'},
+  {value: 'Infinity', label: 'Неограниченно'},
 ];
 
 const selectStaleVariants = [
@@ -49,7 +63,20 @@ export const CreatorForm = () => {
     staleTime: yup.string().optional(),
   });
 
-  const {handleSubmit, control} = useForm({
+  const {showSnack} = useSnackbar();
+  const [createdHref, setCreatedHref] = useState('');
+  const {mutate, isLoading} = useMutation({
+    mutationFn: (data: Form) => api.post<SuccessResponse>('/link/create', data),
+    onSuccess: (data) => onSuccess(data.data),
+  });
+
+  const onSuccess = (data: SuccessResponse) => {
+    reset();
+    console.log(data);
+    setCreatedHref(data.body.href);
+  };
+
+  const {handleSubmit, control, reset} = useForm({
     defaultValues: {
       content: '',
       countOpening: '1',
@@ -61,8 +88,16 @@ export const CreatorForm = () => {
     reValidateMode: 'onChange',
   });
   const onSubmit = (data: Form) => {
-    console.log(data);
+    mutate(data);
   };
+
+  if (createdHref)
+    return (
+      <SuccessCreate
+        setHref={setCreatedHref}
+        href={`onetimelink.ru/check?id=${createdHref}`}
+      />
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -75,6 +110,7 @@ export const CreatorForm = () => {
             alias="Содержимое"
             maxLength={5000}
             errorMessage={error?.message}
+            disabled={isLoading}
             {...field}
           />
         )}
@@ -87,6 +123,7 @@ export const CreatorForm = () => {
             alias="Пароль для открытия"
             placeholder="12345"
             errorMessage={error?.message}
+            disabled={isLoading}
             {...field}
           />
         )}
@@ -104,6 +141,7 @@ export const CreatorForm = () => {
               onValueChange={field.onChange}
               items={selectCountVariants}
               tooltipText={`Ссылка удалится после достижения лимита открытий.`}
+              disabled={isLoading}
             />
           )}
         />
@@ -118,11 +156,12 @@ export const CreatorForm = () => {
               onValueChange={field.onChange}
               items={selectStaleVariants}
               tooltipText={`После истечения срока ссылка перестанет открываться.`}
+              disabled={isLoading}
             />
           )}
         />
       </div>
-      <Button size="xl" color="accent" type="submit">
+      <Button size="xl" color="accent" type="submit" isLoading={isLoading}>
         Создать
       </Button>
     </form>

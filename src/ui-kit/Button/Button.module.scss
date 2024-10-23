@@ -24,6 +24,12 @@
     }
   }
 
+  &.transparent{
+    background: transparent;
+    color: var(--surface-accent);
+
+  }
+
   &:disabled {
     opacity: .4;
   }

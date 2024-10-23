@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type Props = {
   size: 'sm' | 'xl';
-  color: 'accent';
+  color: 'accent' | 'transparent';
   isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
