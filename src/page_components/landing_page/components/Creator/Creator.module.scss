@@ -1,4 +1,4 @@
-@import "@/app/mixins";
+@import '@/app/mixins';
 
 .Root {
   display: flex;
@@ -17,7 +17,7 @@
   background: var(--surface-secondary);
   border-radius: 12px;
 
-  &__button{
+  &__button {
     border: none;
     background: transparent;
     color: var(--text-primary);
@@ -27,15 +27,15 @@
     line-height: 20px;
     border-radius: 8px;
     cursor: pointer;
-    &[data-state="active"] {
+    &[data-state='active'] {
       background: var(--surface-primary);
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
     }
-    transition: background-color .2s linear;
+    transition: background-color 0.2s linear;
 
-    &.soon{
+    &.soon {
       position: relative;
-      &:after{
+      &:after {
         position: absolute;
         right: -15px;
         top: -18px;
@@ -47,7 +47,6 @@
     }
   }
 }
-
 
 .content {
   width: 100%;

@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
   width: 100%;
   display: flex;
   align-items: center;
@@ -9,18 +9,18 @@
   transform: translateY(-50%);
 }
 
-.notFound{
+.notFound {
   color: var(--surface-accent);
   font-weight: 700;
   font-size: 56px;
 }
 
-.notFoundText{
+.notFoundText {
   margin-top: 8px;
   color: var(--text-primary);
   margin-bottom: 0;
 }
 
-.button{
+.button {
   margin-top: 16px;
 }

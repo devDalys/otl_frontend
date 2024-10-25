@@ -1,4 +1,5 @@
-.wrapper{
+@import 'src/app/mixins';
+.wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -6,20 +7,21 @@
   padding-bottom: 20px;
 }
 
-.header{
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.alias,.counter{
+.alias,
+.counter {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
 }
 
-.textarea{
+.textarea {
   resize: none;
   border: 1px solid var(--stroke-primary);
   border-radius: 8px;
@@ -31,42 +33,33 @@
   font-size: 16px;
   line-height: 20px;
   outline: none;
-  transition: border-color .2s linear;
+  transition: border-color 0.2s linear;
   z-index: 1;
-  &.error{
+  &.error {
     border-color: var(--surface-negative);
   }
-  &::placeholder{
+  &::placeholder {
     color: var(--text-tertiary);
     font-size: 16px;
     line-height: 20px;
   }
 
-  &::-webkit-scrollbar{
-    width: 8px;
+  @include scrollbar;
+  &::-webkit-scrollbar-track {
+    margin: 4px 0;
   }
-  &::-webkit-scrollbar-track{
-    background: transparent; /* Цвет фона трека скроллбара */
-    border-radius: 8px;
-    margin: 2px 0;
-  }
-  &::-webkit-scrollbar-thumb{
-    background-color: var(--surface-primary); /* Цвет ползунка скроллбара */
-    border-radius: 8px;
-    cursor: pointer;
 
-  }
-  &:focus{
+  &:focus {
     border-color: var(--stroke-accent);
   }
 }
 
-.errorMessage{
+.errorMessage {
   position: absolute;
   color: var(--text-negative);
   font-size: 14px;
   bottom: 0;
-  animation: animation .2s linear forwards;
+  animation: animation 0.2s linear forwards;
 }
 
 @keyframes animation {

@@ -18,7 +18,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
   const onCopy = () => {
     navigator.clipboard.writeText(`https://${href}`);
     showSnack({
-      title: 'Ссылка успешно создана',
+      title: 'Ссылка скопирована',
       description: 'Поделитесь ей любым удобным для Вас способом',
     });
   };
@@ -26,12 +26,12 @@ export const SuccessCreate = ({setHref, href}: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.image}>
-        <Image
-          src={Success3D.src}
-          alt="One Time Link"
-          width={200}
-          height={200}
-        />
+        {/*<Image*/}
+        {/*  src={Success3D.src}*/}
+        {/*  alt="One Time Link"*/}
+        {/*  width={300}*/}
+        {/*  height={100}*/}
+        {/*/>*/}
       </div>
       <h3 className={styles.title}>Ссылка создана! </h3>
       <div className={styles.inputWrapper}>
@@ -46,7 +46,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
         Скопировать ссылку
       </Button>
       <Button
-        onClick={() => setHref(false)}
+        onClick={() => setHref('')}
         size="xl"
         color="transparent"
         className={styles.button}

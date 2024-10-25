@@ -23,6 +23,7 @@ export const Creator = ({}) => {
   const {showSnack} = useSnackbar();
 
   const onClick = (text: string) => {
+    emitYmEvent('clickHistoryButton');
     showSnack({
       title: 'В разработке',
       description: 'Нажмите на кнопку, если вы ждете этот функционал',

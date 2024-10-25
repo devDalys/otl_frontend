@@ -1,0 +1,39 @@
+@import '@/app/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+  max-height: calc(100vh - 104px);
+  padding: 0 20px;
+  position: relative;
+  overflow: auto;
+  max-width: 820px;
+  margin: auto;
+  @include scrollbar;
+  @include breakpoint-to(720px){
+    max-height: calc(100vh - 88px);
+  }
+}
+
+.content{
+  display: flex;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--text-primary);
+  padding-bottom: 30px;
+}
+
+.button.button{
+  position: sticky;
+  bottom: 16px;
+  width: 100%;
+}
+.createButton{
+  width: 100%;
+  margin: 10px 0;
+}

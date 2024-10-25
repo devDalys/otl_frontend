@@ -10,7 +10,7 @@ type TSnackbarContext = {
   showSnack: (props: TSnackbarElem) => void;
 };
 
-type TSnackbarElem = {
+export type TSnackbarElem = {
   title: string;
   description?: string;
   delay?: number;

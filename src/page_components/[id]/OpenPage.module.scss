@@ -1,0 +1,27 @@
+@import '@/app/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  margin-top: auto;
+  padding: 0 20px;
+}
+
+.h1 {
+  @include h1;
+}
+
+.h2 {
+  @include h2;
+}
+
+.button {
+  margin-top: 24px;
+  @include breakpoint-to(720px) {
+    width: 100%;
+  }
+}

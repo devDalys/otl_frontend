@@ -1,3 +1,4 @@
+@import '@/app/mixins';
 :root {
   --surface-primary: #ffffff;
   --surface-secondary: #f7f7f7;
@@ -10,7 +11,7 @@
   --surface-warningSubdued: #ffeec9;
   --surface-negative: #f73f51;
   --surface-negativeSubdued: #ffdcdf;
-  --surface-input: #F2F3F5;
+  --surface-input: #f2f3f5;
 
   --text-primary: #222222;
   --text-secondary: #727b85;
@@ -22,8 +23,8 @@
   --text-negative: #f73f51;
 
   --stroke-primary: #e1e3e6;
-  --stroke-accent: #4820F8;
-  --stroke-secondary: #EBEDF0;
+  --stroke-accent: #4820f8;
+  --stroke-secondary: #ebedf0;
 }
 
 html,
@@ -41,18 +42,7 @@ body {
   min-height: 100vh;
   height: 100%;
   max-width: 100vw;
-  &::-webkit-scrollbar{
-    width: 4px;
-  }
-  &::-webkit-scrollbar-track{
-    background: transparent; /* Цвет фона трека скроллбара */
-    border-radius: 8px;
-  }
-  &::-webkit-scrollbar-thumb{
-    background-color: var(--surface-accent); /* Цвет ползунка скроллбара */
-    border-radius: 8px;
-    cursor: pointer;
-  }
+  @include scrollbar;
 }
 
 * {

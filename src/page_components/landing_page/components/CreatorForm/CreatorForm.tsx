@@ -4,10 +4,13 @@ import styles from './CreatorForm.module.scss';
 import {api} from '@/api/api';
 import {SuccessCreate} from '@/page_components/landing_page/components/SuccessCreate/SuccessCreate';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
+import {SuccessResponse} from '@/types/responses';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
+import {showError} from '@/utils/showError';
+import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
@@ -21,11 +24,9 @@ type Form = {
   staleTime?: string;
 };
 
-type SuccessResponse = {
-  body: {
-    href: string;
-  };
-};
+type CreateResponse = SuccessResponse<{
+  href: string;
+}>;
 
 const selectCountVariants = [
   {value: '1', label: '1'},
@@ -47,7 +48,7 @@ const selectStaleVariants = [
   {value: '12h', label: '12 часов'},
   {value: '1d', label: '1 день'},
   {value: '7d', label: '1 неделя'},
-  {value: '1m', label: '1 месяц'},
+  {value: '1mn  ', label: '1 месяц'},
   {value: '1y', label: '1 год'},
 ];
 
@@ -66,11 +67,12 @@ export const CreatorForm = () => {
   const {showSnack} = useSnackbar();
   const [createdHref, setCreatedHref] = useState('');
   const {mutate, isLoading} = useMutation({
-    mutationFn: (data: Form) => api.post<SuccessResponse>('/link/create', data),
+    mutationFn: (data: Form) => api.post<CreateResponse>('/link/create', data),
     onSuccess: (data) => onSuccess(data.data),
+    onError: (error) => showError(error, showSnack),
   });
 
-  const onSuccess = (data: SuccessResponse) => {
+  const onSuccess = (data: CreateResponse) => {
     reset();
     console.log(data);
     setCreatedHref(data.body.href);
@@ -88,6 +90,7 @@ export const CreatorForm = () => {
     reValidateMode: 'onChange',
   });
   const onSubmit = (data: Form) => {
+    emitYmEvent('createLinkClick');
     mutate(data);
   };
 
@@ -95,7 +98,7 @@ export const CreatorForm = () => {
     return (
       <SuccessCreate
         setHref={setCreatedHref}
-        href={`onetimelink.ru/check?id=${createdHref}`}
+        href={`onetimelink.ru/${createdHref}`}
       />
     );
 
