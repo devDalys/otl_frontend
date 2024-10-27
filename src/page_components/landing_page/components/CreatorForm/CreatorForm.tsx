@@ -51,19 +51,18 @@ const selectStaleVariants = [
   {value: '1mn  ', label: '1 месяц'},
   {value: '1y', label: '1 год'},
 ];
+const schema = yup.object().shape({
+  content: yup
+    .string()
+    .required('Обязательное поле')
+    .max(5000, 'Максимальная длина поля: 5000')
+    .min(3, 'Минимальная длина поля: 3'),
+  countOpening: yup.string().required(),
+  password: yup.string().max(20, 'Максимальная длина поля: 20').optional(),
+  staleTime: yup.string().optional(),
+});
 
 export const CreatorForm = () => {
-  const schema = yup.object().shape({
-    content: yup
-      .string()
-      .required('Обязательное поле')
-      .max(5000, 'Максимальная длина поля: 5000')
-      .min(3, 'Минимальная длина поля: 3'),
-    countOpening: yup.string().required(),
-    password: yup.string().max(20, 'Максимальная длина поля: 20').optional(),
-    staleTime: yup.string().optional(),
-  });
-
   const {showSnack} = useSnackbar();
   const [createdHref, setCreatedHref] = useState('');
   const {mutate, isLoading} = useMutation({
@@ -74,7 +73,6 @@ export const CreatorForm = () => {
 
   const onSuccess = (data: CreateResponse) => {
     reset();
-    console.log(data);
     setCreatedHref(data.body.href);
   };
 
@@ -90,7 +88,7 @@ export const CreatorForm = () => {
     reValidateMode: 'onChange',
   });
   const onSubmit = (data: Form) => {
-    emitYmEvent('createLinkClick');
+    emitYmEvent('createLinkClick', {withPassword: !!data?.password});
     mutate(data);
   };
 

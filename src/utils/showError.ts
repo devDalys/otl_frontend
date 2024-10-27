@@ -6,7 +6,8 @@ export const showError = (
   callback: (props: TSnackbarElem) => void,
 ) => {
   if (e instanceof AxiosError && e?.response?.data?.msg) {
-    return callback({title: e.response.data.msg});
+    return callback({title: e.response.data.msg, type: 'error'});
   }
-  return callback({title: 'Что-то пошло не так'});
+
+  return callback({title: 'Что-то пошло не так', type: 'error'});
 };

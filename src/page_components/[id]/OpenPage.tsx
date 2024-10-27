@@ -6,10 +6,14 @@ import {OpenedContent} from '@/page_components/[id]/components/OpenedContent/Ope
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {SuccessResponse} from '@/types/responses';
 import {Button} from '@/ui-kit/Button/Button';
+import {Input} from '@/ui-kit/Input/Input';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import {useMutation, useQuery} from 'react-query';
+import * as yup from 'yup';
 
 type Props = {
   withPassword: boolean;
@@ -17,51 +21,92 @@ type Props = {
 };
 
 type Response = SuccessResponse<{content: string}>;
-
+const schema = yup.object().shape({
+  password: yup
+    .string()
+    .max(20, 'Максимальная длина поля: 20')
+    .required('Обязательное поле'),
+});
 export const OpenPage = ({withPassword, id}: Props) => {
-  const [content, setContent] = useState(
-    'STRAPI_URL=https://strapi.stage.rustore.devmail.ru\nCLIENT_OMICRON_URL=https://omicron.rustore.ru\nSERVER_OMICRON_URL=https://omicron.rustore.ru\nOMICRON_URL_CONFIG_ID=rustore_test_landings\nOMICRON_URL_ENV=dev\nQR_REDIRECT_FALLBACK_URL=https://rustore.ru/instruction.html\nAPI_URL=https://app-catalog.stage.rustore.devmail.ru\nCOOKIE_DOMAIN=test.rustore.devmail.ru\nYANDEX_CAPTCHA_CLIENT_ID=ysc1_S4J3cvj8BYKwHh44yi0CMDeBnDwXJxPHsiQ4C4Ztca64c597\nYANDEX_CAPTCHA_SERVER_ID=ysc2_S4J3cvj8BYKwHh44yi0CtAK8FWOtk3s8gvgoqbWT36b85094\nDEEPLINK_URL=https://api.rustore.ru\nIMAGE_PROXY_SALT=5720d659f3d0676463fa08ca9fc52a3ae7e9198cb8f142f5f8bce32361f79416f323490620319e8bcfb1fc8a75cbc67a75e28a15bb9b4d070ca2cc767f4378ae\nIMAGE_PROXY_KEY=4405748f99e02e67f5b08c2a15d392910fecb0ba3e7fd1663eaf0c578746d8de2ff3fe9891742dca355c2d9acf91e4dcae32b3cf86e0d38982fe323564765426\nIMAGE_PROXY_URL=https://imgproxy.rustore.devmail.ru\nTRACER_MODULE=DEV\n',
-  );
+  const [content, setContent] = useState('');
   const {showSnack} = useSnackbar();
+  const {control, handleSubmit} = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      password: '',
+    },
+  });
   const {mutate, isLoading} = useMutation({
-    mutationFn: () =>
+    mutationFn: (password?: string) =>
       api.post<Response>('/link/open', {
         id,
+        password,
       }),
     onSuccess: ({data}) => {
       setContent(data.body.content);
     },
     onError: (error) => showError(error, showSnack),
   });
-  const onOpenClick = () => {
-    mutate();
-    // emitYmEvent()
+  const onOpenClick = (password: string) => {
+    mutate(password);
+    emitYmEvent('clickViewContent');
   };
-  if (content) return <OpenedContent content={content + content} />;
+  if (content) return <OpenedContent content={content} />;
   return (
     <div className={styles.wrapper}>
       {!withPassword && (
-        <>
-          <h1 className={styles.h1}>
-            Нажмите "Открыть" чтобы
-            <br />
-            просмотреть содержимое
-          </h1>
-          <h2 className={styles.h2}>
-            Если Вы не знаете, что это за ссылка - не пытайтесь открыть её.
-            <br /> One Time Link не несет ответственности за её содержимое.
-          </h2>
-        </>
+        <h1 className={styles.h1}>
+          Нажмите "Открыть" чтобы
+          <br />
+          просмотреть содержимое
+        </h1>
       )}
-      <Button
-        size="xl"
-        color="accent"
-        className={styles.button}
-        onClick={() => mutate()}
-        isLoading={isLoading}
-      >
-        Открыть
-      </Button>
+      {withPassword && (
+        <h1 className={styles.h1}>Введите пароль для просмотра содержимого</h1>
+      )}
+      <h2 className={styles.h2}>
+        Если Вы не знаете, что это за ссылка - не пытайтесь открыть её.
+        <br /> One Time Link не несет ответственности за её содержимое.
+      </h2>
+      {withPassword && (
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit(({password}) => onOpenClick(password))}
+        >
+          <Controller
+            control={control}
+            name="password"
+            render={({field: {ref, ...field}, fieldState}) => (
+              <Input
+                alias="Пароль"
+                className={styles.input}
+                {...field}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+          <Button
+            size="xl"
+            color="accent"
+            className={styles.formButton}
+            isLoading={isLoading}
+            type="submit"
+          >
+            Открыть
+          </Button>
+        </form>
+      )}
+      {!withPassword && (
+        <Button
+          size="xl"
+          color="accent"
+          className={styles.button}
+          onClick={() => mutate('')}
+          isLoading={isLoading}
+        >
+          Открыть
+        </Button>
+      )}
     </div>
   );
 };

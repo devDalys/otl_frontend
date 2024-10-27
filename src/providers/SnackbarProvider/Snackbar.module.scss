@@ -34,6 +34,16 @@
   &[data-swipe='move'] {
     transform: translateX(var(--radix-toast-swipe-move-x));
   }
+
+  &__error{
+    background: var(--surface-negative);
+    .title{
+      color: var(--text-constant);
+    }
+    .description{
+      color: var(--text-constant);
+    }
+  }
 }
 
 @keyframes hide {

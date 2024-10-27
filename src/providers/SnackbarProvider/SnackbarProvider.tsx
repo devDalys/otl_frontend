@@ -2,6 +2,7 @@
 
 import styles from './Snackbar.module.scss';
 import * as Toast from '@radix-ui/react-toast';
+import classNames from 'classnames';
 import * as React from 'react';
 import {Fragment, lazy, useContext, useState} from 'react';
 import {v4} from 'uuid';
@@ -18,6 +19,7 @@ export type TSnackbarElem = {
     text: string;
     action: () => void;
   };
+  type?: 'error' | 'default';
 };
 
 const SnackbarContext = React.createContext<TSnackbarContext>({
@@ -46,10 +48,13 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     id,
     delay = 3000,
     button,
+    type = 'default',
   }: TSnackbarElem & {id: string}) => {
     return (
       <Toast.Root
-        className={styles.root}
+        className={classNames(styles.root, {
+          [styles.root__error]: type === 'error',
+        })}
         duration={delay}
         onOpenChange={() => handleHide(id)}
       >
@@ -75,7 +80,6 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
   };
   const showSnackbar = (props: TSnackbarElem) => {
     const id = v4();
-
     setSnackbars({
       ...snackbars,
       [id]: generateSnackbarElem({...props, id}),

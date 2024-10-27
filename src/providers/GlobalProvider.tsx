@@ -5,9 +5,9 @@ import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   return (
     <QueryClientProvider>
-      <ModalProvider>
-        <SnackbarProvider>{children}</SnackbarProvider>
-      </ModalProvider>
+      <SnackbarProvider>
+        <ModalProvider>{children}</ModalProvider>
+      </SnackbarProvider>
     </QueryClientProvider>
   );
 };
