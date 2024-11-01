@@ -13,7 +13,7 @@
 @mixin h1 {
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 42px;
+  line-height: 48px;
   font-size: 40px;
   text-align: center;
   white-space: pre-line;
@@ -40,10 +40,6 @@
     font-size: 18px;
     line-height: 24px;
     white-space: normal;
-  }
-  @include breakpoint-to(480px) {
-    font-size: 18px;
-    line-height: 24px;
   }
 }
 

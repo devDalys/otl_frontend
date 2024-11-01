@@ -30,7 +30,7 @@ const schema = yup.object().shape({
 export const OpenPage = ({withPassword, id}: Props) => {
   const [content, setContent] = useState('');
   const {showSnack} = useSnackbar();
-  const {control, handleSubmit} = useForm({
+  const {control, handleSubmit, reset} = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       password: '',
@@ -45,7 +45,10 @@ export const OpenPage = ({withPassword, id}: Props) => {
     onSuccess: ({data}) => {
       setContent(data.body.content);
     },
-    onError: (error) => showError(error, showSnack),
+    onError: (error) => {
+      reset();
+      showError(error, showSnack);
+    },
   });
   const onOpenClick = (password: string) => {
     mutate(password);
@@ -79,6 +82,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
                 alias="Пароль"
+                type="password"
                 className={styles.input}
                 {...field}
                 errorMessage={fieldState.error?.message}

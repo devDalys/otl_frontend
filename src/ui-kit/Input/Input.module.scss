@@ -6,11 +6,17 @@
   padding-bottom: 20px;
 }
 
+.inputWrapper{
+  width: 100%;
+  position: relative;
+  margin-top: 6px;
+}
+
 .input {
   border: 1px solid var(--stroke-primary);
+  width: 100%;
   border-radius: 8px;
   background: var(--surface-input);
-  margin-top: 6px;
   padding: 10px 12px;
   color: var(--text-primary);
   font-size: 16px;
@@ -45,6 +51,39 @@
   font-size: 14px;
   bottom: 0;
   animation: animation 0.2s linear forwards;
+}
+
+.lock{
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  background: var(--surface-input);
+  color: var(--text-primary);
+  cursor: pointer;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  svg{
+    width: 100%;
+    height: 100%;
+  }
+  &:before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    transform: rotate(45deg) translate(-130%, -50%);
+    top: 50%;
+    left: 0;
+    transition: transform .2s linear;
+  }
+  &__unlock{
+    &:before{
+      transform: rotate(45deg) translateY(-50%);
+    }
+  }
 }
 
 @keyframes animation {

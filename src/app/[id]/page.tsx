@@ -9,7 +9,7 @@ type Props = {
   };
 };
 
-const getData = (id: string) => {};
+export const dynamic = 'force-dynamic';
 
 type Response = SuccessResponse<{security: boolean}>;
 

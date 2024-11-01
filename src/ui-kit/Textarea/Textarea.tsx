@@ -20,7 +20,9 @@ export const Textarea = ({
       <div className={styles.header}>
         <h3 className={styles.alias}>{alias}</h3>
         <span
-          className={styles.counter}
+          className={classNames(styles.counter, {
+            [styles.error]: errorMessage?.length,
+          })}
         >{`${(textAreaProps?.value as string)?.length ?? 0} / ${maxLength}`}</span>
       </div>
       <textarea

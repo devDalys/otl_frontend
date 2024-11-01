@@ -125,6 +125,7 @@ export const CreatorForm = () => {
             placeholder="12345"
             errorMessage={error?.message}
             disabled={isLoading}
+            type="password"
             {...field}
           />
         )}

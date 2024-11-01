@@ -26,7 +26,7 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .required('Обязательное поле')
-    .max(15, 'Максимальная длина поля: 15')
+    .max(30, 'Максимальная длина поля: 30')
     .min(2, 'Минимальная длина поля: 2'),
   content: yup
     .string()
