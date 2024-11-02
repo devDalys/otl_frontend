@@ -1,5 +1,6 @@
-const {cspHeader} = require('./src/consts/csp.ts');
 /** @type {import('next').NextConfig} */
+const {cspHeader} = require('./src/consts/csp.ts');
+
 const nextConfig = {
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -36,6 +37,9 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  publicRuntimeConfig: {
+    BACKAPI_URL: process.env.BACKAPI_URL,
   },
 };
 

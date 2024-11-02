@@ -29,8 +29,11 @@ export const metadata: Metadata = {
   title: 'One Time Link - одноразовые ссылки с паролем',
   description: 'Генератор одноразовых ссылок',
   icons: {
-    icon: '/images/Logo.png',
-    apple: '/images/Logo.png',
+    icon: '/images/favicon.ico',
+    apple: '/images/favicon.ico',
+  },
+  alternates: {
+    canonical: 'https://onetimelink.ru',
   },
 };
 
