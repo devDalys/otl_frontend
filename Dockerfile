@@ -32,6 +32,7 @@ COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/package.json .
 COPY --from=builder /usr/src/app/public ./public
+COPY --from=builder /usr/src/app/src ./src
 
 RUN mkdir -p /usr/src/app/.next/cache
 RUN ln -s /tmp /usr/src/app/.next/cache/fetch-cache

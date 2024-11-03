@@ -12,7 +12,7 @@ import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {useMutation, useQuery} from 'react-query';
+import {useMutation} from 'react-query';
 import * as yup from 'yup';
 
 type Props = {

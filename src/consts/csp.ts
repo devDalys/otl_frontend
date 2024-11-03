@@ -15,6 +15,7 @@ const cspHeader = `
     https://metrica.yandex.com.tr 
     https://yandexadexchange.net 
     https://*.yandexadexchange.net 
+    https://*.yandex.com
     https://yastatic.net 
     https://*.yandex.ru 
     https://*.adfox.ru 
