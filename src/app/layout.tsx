@@ -25,7 +25,6 @@ const Gilroy = localFont({
   display: 'swap',
   variable: '--gilroy-font',
 });
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKAPI_URL;
 
 export const metadata: Metadata = {
   title: 'One Time Link - одноразовые ссылки с паролем',

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
+const isClient = typeof window !== 'undefined';
+
 export const api = axios.create({
   timeout: 3000,
-  // baseURL: process.env['NEXT_PUBLIC_BACKAPI_URL'],
+  baseURL: isClient ? '/api' : process.env.BACKAPI_URL,
 });
