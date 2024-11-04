@@ -4,8 +4,6 @@ import styles from './SuccessCreate.module.scss';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
-import Image from 'next/image';
-import Success3D from 'public/images/Success3D.png';
 import {SetStateAction} from 'react';
 
 type Props = {
@@ -25,14 +23,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.image}>
-        {/*<Image*/}
-        {/*  src={Success3D.src}*/}
-        {/*  alt="One Time Link"*/}
-        {/*  width={300}*/}
-        {/*  height={100}*/}
-        {/*/>*/}
-      </div>
+      <div className={styles.image}></div>
       <h3 className={styles.title}>Ссылка создана! </h3>
       <div className={styles.inputWrapper}>
         <Input value={href} disabled className={styles.input} />

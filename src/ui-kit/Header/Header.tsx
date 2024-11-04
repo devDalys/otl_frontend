@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.logo}>
-        <Image src={logo.src} alt="One Time Link" fill />
+        <Image src={logo.src} alt="One Time Link" fill priority />
       </Link>
     </header>
   );

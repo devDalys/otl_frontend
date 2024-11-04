@@ -73,7 +73,7 @@ export const CreatorForm = () => {
 
   const onSuccess = (data: CreateResponse) => {
     reset();
-    setCreatedHref(data.body.href);
+    setCreatedHref(`${document.location.host}/${data.body.href}`);
   };
 
   const {handleSubmit, control, reset} = useForm({
@@ -93,12 +93,7 @@ export const CreatorForm = () => {
   };
 
   if (createdHref)
-    return (
-      <SuccessCreate
-        setHref={setCreatedHref}
-        href={`onetimelink.ru/${createdHref}`}
-      />
-    );
+    return <SuccessCreate setHref={setCreatedHref} href={createdHref} />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
