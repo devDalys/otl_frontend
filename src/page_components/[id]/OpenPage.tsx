@@ -84,6 +84,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
                 alias="Пароль"
                 type="password"
                 className={styles.input}
+                autoComplete="off"
                 {...field}
                 errorMessage={fieldState.error?.message}
               />

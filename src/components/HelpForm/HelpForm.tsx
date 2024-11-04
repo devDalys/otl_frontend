@@ -80,6 +80,7 @@ export const HelpForm = ({hideModal}: Props) => {
             errorMessage={error?.message}
             disabled={isLoading}
             {...field}
+            autoComplete="name"
           />
         )}
       />
@@ -106,6 +107,7 @@ export const HelpForm = ({hideModal}: Props) => {
             placeholder="petya@mail.ru"
             errorMessage={error?.message}
             disabled={isLoading}
+            autoComplete="email"
             {...field}
           />
         )}
