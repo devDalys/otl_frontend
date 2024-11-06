@@ -1,12 +1,23 @@
-import Script from 'next/script';
+'use client';
 
-export const YaMetric = () => (
-  <>
-    <Script
-      id="ya-metrika"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
+import Script from 'next/script';
+import {useState} from 'react';
+
+export const YaMetric = () => {
+  const [isReady, setIsReady] = useState(false);
+  const timeout = setTimeout(() => {
+    setIsReady(true);
+    clearTimeout(timeout);
+  }, 2000);
+
+  if (isReady)
+    return (
+      <>
+        <Script
+          id="ya-metrika"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments);};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -20,16 +31,17 @@ export const YaMetric = () => (
         webvisor:true,
    });
 `,
-      }}
-    ></Script>
-    <noscript>
-      <div>
-        <img
-          src="https://mc.yandex.ru/watch/98600395"
-          style={{position: 'absolute', left: '-9999px'}}
-          alt=""
-        />
-      </div>
-    </noscript>
-  </>
-);
+          }}
+        ></Script>
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/98600395"
+              style={{position: 'absolute', left: '-9999px'}}
+              alt=""
+            />
+          </div>
+        </noscript>
+      </>
+    );
+};

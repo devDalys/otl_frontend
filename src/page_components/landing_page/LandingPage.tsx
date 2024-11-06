@@ -11,7 +11,7 @@ export const LandingPage = () => {
           </h1>
           <h2 className={styles.h2}>
             {
-              'Все данные защищены, поэтому делиться\nими через One Time Link безопасно.'
+              'Все данные защищены, поэтому делиться\nими через OneTimeLink безопасно.'
             }
           </h2>
         </div>

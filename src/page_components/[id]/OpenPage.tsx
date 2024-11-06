@@ -69,7 +69,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
       )}
       <h2 className={styles.h2}>
         Если Вы не знаете, что это за ссылка - не пытайтесь открыть её.
-        <br /> One Time Link не несет ответственности за её содержимое.
+        <br /> OneTimeLink не несет ответственности за её содержимое.
       </h2>
       {withPassword && (
         <form

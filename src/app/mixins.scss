@@ -24,7 +24,7 @@
   }
   @include breakpoint-to(480px) {
     font-size: 28px;
-    line-height: 32px;
+    line-height: normal;
   }
 }
 

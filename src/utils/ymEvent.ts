@@ -3,7 +3,7 @@ export const emitYmEvent = (
   params: Record<string, any> = {},
 ) => {
   if (!window?.ym) {
-    return;
+    window.ym = [];
   }
 
   const currentDate = new Date();
