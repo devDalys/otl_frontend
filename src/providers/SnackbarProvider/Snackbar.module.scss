@@ -22,7 +22,7 @@
   padding: 15px;
   display: grid;
   grid-template-areas: 'title title' 'description action';
-  grid-template-columns: auto max-content;
+  grid-template-columns: auto auto;
   column-gap: 15px;
   align-items: center;
   &[data-state='open'] {

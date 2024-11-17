@@ -26,9 +26,9 @@ const Gilroy = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'OneTimeLink - одноразовые ссылки с паролем',
+  title: 'OneTimeLink - одноразовые короткие ссылки с паролем',
   description:
-    'Создать одноразовую или многоразовую ссылку с паролем, сроком действия при помощи OneTimeLink. Бесплатно, безопасно, удобно.',
+    'Создать одноразовую или многоразовую короткую ссылку с паролем, сроком действия при помощи OneTimeLink. Бесплатно, безопасно, удобно.',
   icons: {
     icon: '/images/favicon.ico',
     apple: '/images/favicon.ico',

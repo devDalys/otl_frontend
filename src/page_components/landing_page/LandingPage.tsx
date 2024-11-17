@@ -7,7 +7,7 @@ export const LandingPage = () => {
       <div className={styles.content}>
         <div className={styles.titles}>
           <h1 className={styles.h1}>
-            {`Создать одноразовую ссылку\nс паролем и сроком действия`}
+            {`Создать одноразовую короткую ссылку\nс паролем и сроком действия`}
           </h1>
           <h2 className={styles.h2}>
             {
