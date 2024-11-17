@@ -4,5 +4,5 @@ const isClient = typeof window !== 'undefined';
 
 export const api = axios.create({
   timeout: 3000,
-  baseURL: 'https://onetimelink.ru/api',
+  baseURL: isClient ? '/api' : process.env['SERVER_SIDE_URL'],
 });
