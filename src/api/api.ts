@@ -1,8 +1,10 @@
 import axios from 'axios';
+import {headers} from 'next/headers';
 
 const isClient = typeof window !== 'undefined';
 
 export const api = axios.create({
   timeout: 3000,
-  baseURL: 'https://backapi.onetimelink.ru',
+  baseURL: isClient ? '/api' : process.env.BACKAPI_URL,
+  headers: !isClient ? {'x-real-ip': headers().get('x-real-ip')} : {},
 });
