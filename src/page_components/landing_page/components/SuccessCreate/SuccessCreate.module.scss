@@ -36,7 +36,7 @@
 
 .button {
   width: 340px;
-  &:last-child {
+  &:not(:first-child) {
     margin-top: 12px;
   }
 }

@@ -1,9 +1,11 @@
 'use client';
 
 import styles from './SuccessCreate.module.scss';
+import {useShare} from '@/hooks/useShare';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
+import {emitYmEvent} from '@/utils/ymEvent';
 import {SetStateAction} from 'react';
 
 type Props = {
@@ -13,12 +15,22 @@ type Props = {
 
 export const SuccessCreate = ({setHref, href}: Props) => {
   const {showSnack} = useSnackbar();
+  const {share, isCanShare} = useShare({
+    url: `https://${href}`,
+    title: 'OneTimeLink',
+    text: 'Одноразовая ссылка, перейдите по ссылке чтобы открыть её.',
+  });
   const onCopy = () => {
+    emitYmEvent('copyButtonClick');
     navigator.clipboard.writeText(`https://${href}`);
     showSnack({
       title: 'Ссылка скопирована',
       description: 'Поделитесь ей любым удобным для Вас способом',
     });
+  };
+  const onShare = () => {
+    emitYmEvent('shareButtonClick');
+    share();
   };
 
   return (
@@ -36,6 +48,16 @@ export const SuccessCreate = ({setHref, href}: Props) => {
       >
         Скопировать ссылку
       </Button>
+      {isCanShare && (
+        <Button
+          onClick={onShare}
+          size="xl"
+          color="transparent"
+          className={styles.button}
+        >
+          Поделиться ссылкой
+        </Button>
+      )}
       <Button
         onClick={() => setHref('')}
         size="xl"
