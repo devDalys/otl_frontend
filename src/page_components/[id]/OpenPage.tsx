@@ -7,6 +7,7 @@ import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {SuccessResponse} from '@/types/responses';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
+import {historyActions} from '@/utils/history';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -44,6 +45,11 @@ export const OpenPage = ({withPassword, id}: Props) => {
       }),
     onSuccess: ({data}) => {
       setContent(data.body.content);
+      historyActions.add({
+        link: `${document.location.host}/${id}`,
+        timestamp: Date.now(),
+        type: 'opening',
+      });
     },
     onError: (error) => {
       reset();
@@ -54,7 +60,9 @@ export const OpenPage = ({withPassword, id}: Props) => {
     mutate(password);
     emitYmEvent('clickViewContent');
   };
+
   if (content) return <OpenedContent content={content} />;
+
   return (
     <div className={styles.wrapper}>
       {!withPassword && (
@@ -106,7 +114,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
           size="xl"
           color="accent"
           className={styles.button}
-          onClick={() => mutate('')}
+          onClick={() => onOpenClick('')}
           isLoading={isLoading}
         >
           Открыть

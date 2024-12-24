@@ -2,6 +2,7 @@
 
 import styles from './Creator.module.scss';
 import {CreatorForm} from '@/page_components/landing_page/components/CreatorForm/CreatorForm';
+import {History} from '@/page_components/landing_page/components/History/History';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {emitYmEvent} from '@/utils/ymEvent';
 import * as Tabs from '@radix-ui/react-tabs';
@@ -16,23 +17,10 @@ export const Creator = ({}) => {
     },
     history: {
       name: 'history',
-      screen: <div>История</div>,
+      screen: <History />,
     },
   };
 
-  const {showSnack} = useSnackbar();
-
-  const onClick = (text: string) => {
-    emitYmEvent('clickHistoryButton');
-    showSnack({
-      title: 'В разработке',
-      description: 'Нажмите на кнопку, если вы ждете этот функционал',
-      button: {
-        text: 'Жду!',
-        action: () => emitYmEvent('waitingContent', {button: text}),
-      },
-    });
-  };
   return (
     <Tabs.Root className={styles.Root} defaultValue={screens.create.name}>
       <Tabs.List className={styles.triggers} aria-label="Создание ссылок">
@@ -42,18 +30,23 @@ export const Creator = ({}) => {
         >
           Создание ссылки
         </Tabs.Trigger>
-        <div
-          className={classNames(styles.triggers__button, styles.soon)}
-          // value={screens.history.name}
-          onClick={() => onClick('История')}
+        <Tabs.Trigger
+          className={styles.triggers__button}
+          value={screens.history.name}
         >
           История
-        </div>
+        </Tabs.Trigger>
       </Tabs.List>
       <Tabs.Content className={styles.content} value={screens.create.name}>
         {screens.create.screen}
       </Tabs.Content>
-      <Tabs.Content className={styles.content} value={screens.history.name}>
+      <Tabs.Content
+        className={styles.content}
+        value={screens.history.name}
+        onClick={() => {
+          emitYmEvent('clickHistoryButton');
+        }}
+      >
         {screens.history.screen}
       </Tabs.Content>
     </Tabs.Root>

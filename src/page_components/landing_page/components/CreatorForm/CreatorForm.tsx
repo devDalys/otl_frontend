@@ -9,6 +9,7 @@ import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
+import {historyActions} from '@/utils/history';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -73,7 +74,9 @@ export const CreatorForm = () => {
 
   const onSuccess = (data: CreateResponse) => {
     reset();
-    setCreatedHref(`${document.location.host}/${data.body.href}`);
+    const link = `${document.location.host}/${data.body.href}`;
+    setCreatedHref(link);
+    historyActions.add({link, timestamp: Date.now(), type: 'creating'});
   };
 
   const {handleSubmit, control, reset} = useForm({
