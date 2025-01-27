@@ -49,7 +49,7 @@ const selectStaleVariants = [
   {value: '12h', label: '12 часов'},
   {value: '1d', label: '1 день'},
   {value: '7d', label: '1 неделя'},
-  {value: '1mn  ', label: '1 месяц'},
+  {value: '1mn', label: '1 месяц'},
   {value: '1y', label: '1 год'},
 ];
 const schema = yup.object().shape({
