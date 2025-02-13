@@ -1,8 +1,8 @@
-import {api} from '@/api/api';
+import {ipApi} from '@/api/ipApi';
 import {NotFoundSlugPage} from '@/components/NotFoundSlug/NotFoundSlug';
 import {OpenPage} from '@/page_components/[id]/OpenPage';
 import {SuccessResponse} from '@/types/responses';
-import {notFound} from 'next/navigation';
+import {headers} from 'next/headers';
 
 type Props = {
   params: {
@@ -15,7 +15,8 @@ export const dynamic = 'force-dynamic';
 type Response = SuccessResponse<{security: boolean}>;
 
 export default async function Page({params}: Props) {
-  const link = await api
+  const realIp = headers().get('x-real-ip') ?? '';
+  const link = await ipApi(realIp)
     .get<Response>(`/link/checkout/${params.id}`)
     .catch(() => null);
   if (!link) return <NotFoundSlugPage />;

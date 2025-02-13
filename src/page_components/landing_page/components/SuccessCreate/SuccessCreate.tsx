@@ -5,6 +5,7 @@ import {useShare} from '@/hooks/useShare';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
+import {scrollToTop} from '@/utils/scrollToTop';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {SetStateAction} from 'react';
 
@@ -59,7 +60,10 @@ export const SuccessCreate = ({setHref, href}: Props) => {
         </Button>
       )}
       <Button
-        onClick={() => setHref('')}
+        onClick={() => {
+          setHref('');
+          scrollToTop();
+        }}
         size="xl"
         color="transparent"
         className={styles.button}

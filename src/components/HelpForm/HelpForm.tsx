@@ -7,6 +7,7 @@ import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
 import {showError} from '@/utils/showError';
+import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
@@ -66,6 +67,7 @@ export const HelpForm = ({hideModal}: Props) => {
 
   const onSubmit = (data: Form) => {
     mutate(data);
+    emitYmEvent('feedBackFormSend');
   };
 
   return (

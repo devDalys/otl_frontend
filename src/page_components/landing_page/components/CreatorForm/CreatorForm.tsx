@@ -10,6 +10,7 @@ import {Input} from '@/ui-kit/Input/Input';
 import {Select} from '@/ui-kit/Select/Select';
 import {Textarea} from '@/ui-kit/Textarea/Textarea';
 import {historyActions} from '@/utils/history';
+import {scrollToTop} from '@/utils/scrollToTop';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -73,6 +74,7 @@ export const CreatorForm = () => {
   });
 
   const onSuccess = (data: CreateResponse) => {
+    scrollToTop();
     reset();
     const link = `${document.location.host}/${data.body.href}`;
     setCreatedHref(link);
