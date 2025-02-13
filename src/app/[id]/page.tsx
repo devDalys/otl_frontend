@@ -20,7 +20,7 @@ export default async function Page({params}: Props) {
   const link = await ipApi(realIp)
     .get<Response>(`/link/checkout/${params.id}`)
     .catch((err) => err);
-  if (link?.status === 403) return <ToManyRequestPage />;
+  if (link?.status === 429) return <ToManyRequestPage />;
   if (!link?.data?.body) return <NotFoundSlugPage />;
 
   return <OpenPage withPassword={link.data.body.security} id={params.id} />;
