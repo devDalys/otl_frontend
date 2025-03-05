@@ -164,7 +164,13 @@ export const CreatorForm = () => {
           )}
         />
       </div>
-      <Button size="xl" color="accent" type="submit" isLoading={isLoading}>
+      <Button
+        size="xl"
+        color="accent"
+        type="submit"
+        isLoading={isLoading}
+        className={styles.button}
+      >
         Создать
       </Button>
     </form>

@@ -5,6 +5,7 @@
   font-weight: 400;
   display: flex;
   align-items: center;
+  margin-bottom: 6px;
 }
 
 .tooltip {
@@ -15,7 +16,6 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
   position: relative;
 }
 
@@ -23,7 +23,6 @@
   border: 1px solid var(--stroke-primary);
   border-radius: 8px;
   background: var(--surface-input);
-  margin-top: 6px;
   padding: 10px 12px;
   color: var(--text-primary);
   font-size: 16px;

@@ -8,10 +8,17 @@
   background: transparent;
   align-items: center;
   justify-content: center;
-  padding: 32px 0;
+  padding: 24px 0;
   @include breakpoint-to(720px) {
-    padding: 24px 0;
+    padding: 14px 0;
   }
+}
+
+.container {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  align-items: center;
 }
 
 .logo {
@@ -19,4 +26,17 @@
   position: relative;
   width: 80px;
   height: 40px;
+  margin-right: 64px;
+}
+
+.link {
+  font-size: 18px;
+  font-weight: 24px;
+  font-weight: 500;
+  margin-right: 8px;
+  padding: 8px 40px;
+}
+
+.rightSide {
+  margin-left: auto;
 }

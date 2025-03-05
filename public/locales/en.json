@@ -1,0 +1,22 @@
+{
+  "mainpage": {
+    "h1": "Create a one-time short link\nwith password and expiration date",
+    "h2": "All data is protected, so sharing\nit via OneTimeLink is secure.",
+    "createTab": "Creating a link",
+    "historyTab": "History",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": ""
+  },
+  "header": {
+    "home": "Home",
+    "updates": "Updates",
+    "support": "Support",
+    "": "",
+    "": "",
+    "": ""
+  }
+}

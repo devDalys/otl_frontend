@@ -1,9 +1,9 @@
 import './globals.scss';
+import HtmlLangLayout from '@/layouts/HtmlLangLayout';
 import {GlobalProvider} from '@/providers/GlobalProvider';
 import {YaMetric} from '@/scripts/YaMetric';
-import {Footer} from '@/ui-kit/Footer/Footer';
-import {Header} from '@/ui-kit/Header/Header';
-import type {Metadata} from 'next';
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
 import localFont from 'next/font/local';
 
 const Gilroy = localFont({
@@ -25,34 +25,21 @@ const Gilroy = localFont({
   variable: '--gilroy-font',
 });
 
-export const metadata: Metadata = {
-  title: 'OneTimeLink - одноразовые короткие ссылки с паролем',
-  description:
-    'Создать одноразовую или многоразовую короткую ссылку с паролем, сроком действия при помощи OneTimeLink. Бесплатно, безопасно, удобно.',
-  icons: {
-    icon: '/images/favicon.ico',
-    apple: '/images/favicon.ico',
-  },
-  alternates: {
-    canonical: 'https://onetimelink.ru',
-  },
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const messages = await getMessages({locale: 'ru'});
+
   return (
-    <html lang="ru">
+    <HtmlLangLayout>
       <body className={`${Gilroy.variable}`}>
-        <YaMetric />
-        <GlobalProvider>
-          <Header />
-          {children}
-          <Footer />
-        </GlobalProvider>
+        <NextIntlClientProvider messages={messages} locale="ru">
+          <YaMetric />
+          <GlobalProvider>{children}</GlobalProvider>
+        </NextIntlClientProvider>
       </body>
-    </html>
+    </HtmlLangLayout>
   );
 }
