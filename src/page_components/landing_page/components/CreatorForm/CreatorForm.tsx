@@ -14,7 +14,8 @@ import {scrollToTop} from '@/utils/scrollToTop';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useState} from 'react';
+import {useTranslations} from 'next-intl';
+import {useState, useTransition} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
 import * as yup from 'yup';
@@ -30,7 +31,7 @@ type CreateResponse = SuccessResponse<{
   href: string;
 }>;
 
-const selectCountVariants = [
+const selectCountVariants = (t: any) => [
   {value: '1', label: '1'},
   {value: '2', label: '2'},
   {value: '3', label: '3'},
@@ -39,30 +40,34 @@ const selectCountVariants = [
   {value: '10', label: '10'},
   {value: '50', label: '50'},
   {value: '100', label: '100'},
-  {value: 'Infinity', label: 'Неограниченно'},
+  {value: 'Infinity', label: t('Неограниченно')},
+];
+const selectStaleVariants = (t: any) => [
+  {value: '5m', label: t('5 минут')},
+  {value: '30m', label: t('30 минут')},
+  {value: '1h', label: t('1 час')},
+  {value: '6h', label: t('6 часов')},
+  {value: '12h', label: t('12 часов')},
+  {value: '1d', label: t('1 день')},
+  {value: '7d', label: t('1 неделя')},
+  {value: '1mn', label: t('1 месяц')},
+  {value: '1y', label: t('1 год')},
 ];
 
-const selectStaleVariants = [
-  {value: '5m', label: '5 минут'},
-  {value: '30m', label: '30 минут'},
-  {value: '1h', label: '1 час'},
-  {value: '6h', label: '6 часов'},
-  {value: '12h', label: '12 часов'},
-  {value: '1d', label: '1 день'},
-  {value: '7d', label: '1 неделя'},
-  {value: '1mn', label: '1 месяц'},
-  {value: '1y', label: '1 год'},
-];
-const schema = yup.object().shape({
-  content: yup
-    .string()
-    .required('Обязательное поле')
-    .max(5000, 'Максимальная длина поля: 5000')
-    .min(3, 'Минимальная длина поля: 3'),
-  countOpening: yup.string().required(),
-  password: yup.string().max(20, 'Максимальная длина поля: 20').optional(),
-  staleTime: yup.string().optional(),
-});
+const schema = (t: any) =>
+  yup.object().shape({
+    content: yup
+      .string()
+      .required(t('обязательное_поле'))
+      .max(5000, t('максимальная_длина_поля', {value: 5000}))
+      .min(3, t('минимальная_длина_поля', {value: 3})),
+    countOpening: yup.string().required(),
+    password: yup
+      .string()
+      .max(20, t('максимальная_длина_поля', {value: 20}))
+      .optional(),
+    staleTime: yup.string().optional(),
+  });
 
 export const CreatorForm = () => {
   const {showSnack} = useSnackbar();
@@ -72,7 +77,8 @@ export const CreatorForm = () => {
     onSuccess: (data) => onSuccess(data.data),
     onError: (error) => showError(error, showSnack),
   });
-
+  const t = useTranslations('creatorForm');
+  const formTranslations = useTranslations('form');
   const onSuccess = (data: CreateResponse) => {
     scrollToTop();
     reset();
@@ -88,7 +94,7 @@ export const CreatorForm = () => {
       password: '',
       staleTime: '1d',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(formTranslations)),
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
@@ -107,8 +113,8 @@ export const CreatorForm = () => {
         control={control}
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Textarea
-            placeholder="Привет! Высылаю тебе пароль от аккаунта: iloveonetimelink"
-            alias="Содержимое"
+            placeholder={t('contentPlaceholder')}
+            alias={t('content')}
             maxLength={5000}
             errorMessage={error?.message}
             disabled={isLoading}
@@ -121,7 +127,7 @@ export const CreatorForm = () => {
         control={control}
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Input
-            alias="Пароль для открытия"
+            alias={t('password')}
             placeholder="12345"
             errorMessage={error?.message}
             disabled={isLoading}
@@ -138,12 +144,12 @@ export const CreatorForm = () => {
           control={control}
           render={({field: {ref, ...field}}) => (
             <Select
-              alias="Количество открытий"
+              alias={t('countOpening')}
               defaultValue={field.value}
               value={field.value}
               onValueChange={field.onChange}
-              items={selectCountVariants}
-              tooltipText={`Ссылка удалится после достижения лимита открытий.`}
+              items={selectCountVariants(t)}
+              tooltipText={t('countPlaceholder')}
               disabled={isLoading}
             />
           )}
@@ -153,12 +159,12 @@ export const CreatorForm = () => {
           control={control}
           render={({field: {ref, ...field}}) => (
             <Select
-              alias="Время жизни"
+              alias={t('lifetime')}
               defaultValue={field.value}
               value={field.value}
               onValueChange={field.onChange}
-              items={selectStaleVariants}
-              tooltipText={`После истечения срока ссылка перестанет открываться.`}
+              items={selectStaleVariants(t)}
+              tooltipText={t('ttlPlaceholder')}
               disabled={isLoading}
             />
           )}
@@ -171,7 +177,7 @@ export const CreatorForm = () => {
         isLoading={isLoading}
         className={styles.button}
       >
-        Создать
+        {t('create')}
       </Button>
     </form>
   );

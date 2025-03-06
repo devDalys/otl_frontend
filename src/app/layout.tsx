@@ -34,12 +34,12 @@ export default async function RootLayout({
 
   return (
     <HtmlLangLayout>
-      <body className={`${Gilroy.variable}`}>
-        <NextIntlClientProvider messages={messages} locale="ru">
+      <NextIntlClientProvider messages={messages} locale="en">
+        <body className={`${Gilroy.variable}`}>
           <YaMetric />
           <GlobalProvider>{children}</GlobalProvider>
-        </NextIntlClientProvider>
-      </body>
+        </body>
+      </NextIntlClientProvider>
     </HtmlLangLayout>
   );
 }
