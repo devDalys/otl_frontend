@@ -1,5 +1,3 @@
-import {setLocale} from '@/i18n/request';
-import {setUserLocale} from '@/i18n/utils';
 import {Footer} from '@/ui-kit/Footer/Footer';
 import {Header} from '@/ui-kit/Header/Header';
 import type {Metadata} from 'next';
