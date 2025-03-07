@@ -33,6 +33,7 @@ export const Creator = ({}) => {
         <Tabs.Trigger
           className={styles.triggers__button}
           value={screens.history.name}
+          data-testid="historyButton"
         >
           История
         </Tabs.Trigger>
