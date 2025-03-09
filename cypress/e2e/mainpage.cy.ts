@@ -2,6 +2,20 @@ describe('Тестирование критических компонентов
   let linkUrl: string = '';
   const password = 'somepassword';
   const content = 'Автотест для проверки функционала!' + Date.now();
+  let localStorageMemory: any = {};
+
+  afterEach(() => {
+    Object.keys(localStorage).forEach((key) => {
+      localStorageMemory[key] = localStorage.getItem(key);
+    });
+  });
+
+  // Восстанавливаем состояние localStorage перед каждым тестом
+  beforeEach(() => {
+    Object.keys(localStorageMemory).forEach((key) => {
+      localStorage.setItem(key, localStorageMemory[key]);
+    });
+  });
 
   it('Проверяем создание ссылки:', async () => {
     cy.visit('http://localhost:3000/');
