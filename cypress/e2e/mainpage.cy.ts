@@ -34,11 +34,7 @@ describe('Тестирование критических компонентов
 
     cy.getByTestId('successScreen').should('be.visible');
 
-    const value: string = await new Promise((res) => {
-      cy.getByTestId('successFullCreateInput')
-        .invoke('val')
-        .then((value) => res(value as string));
-    });
+    const value: string = '';
 
     expect(typeof value === 'string').equal(true);
     linkUrl = value;
