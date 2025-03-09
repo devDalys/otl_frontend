@@ -34,10 +34,12 @@ describe('Тестирование критических компонентов
 
     cy.getByTestId('successScreen').should('be.visible');
 
-    const value: string = '';
-
-    expect(typeof value === 'string').equal(true);
-    linkUrl = value;
+    cy.getByTestId('successFullCreateInput')
+      .invoke('val')
+      .then((value) => {
+        expect(typeof value === 'string').equal(true);
+        linkUrl = value as string;
+      });
   });
   it('Проверяем открытие ссылки:', () => {
     cy.visit(linkUrl);
