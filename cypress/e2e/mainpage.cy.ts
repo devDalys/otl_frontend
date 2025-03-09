@@ -17,6 +17,10 @@ describe('Тестирование критических компонентов
     });
   });
 
+  it('Мок тест', () => {
+    expect(typeof 'test' === 'string').equal(true);
+  });
+
   it('Проверяем создание ссылки:', async () => {
     cy.visit('http://localhost:3000/');
     const contentField = cy.getByTestId('contentField');
