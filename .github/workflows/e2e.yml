@@ -8,16 +8,29 @@ on:
 
 jobs:
   e2e:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cypress run
+
+      - name: Install dependencies
+        run: npm ci # Используем ci вместо install для стабильности в CI/CD
+
+      - name: Build project
+        run: npm run build # Сборка Next.js
+
+      - name: Start project
+        run: npm run start
+
+      - name: Check server response
+        run: curl -I http://localhost:3000
+
+      - name: Start server and run Cypress
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:3000' # Ждем, пока сервер запустится
+
         env:
           SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
           BACKAPI_URL: ${{ vars.BACKAPI_URL }}
