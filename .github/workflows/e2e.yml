@@ -18,6 +18,7 @@ jobs:
         with:
           build: npm run build
           start: npm run start
+          browser: chrome
           wait-on: 'http://localhost:3000'
         env:
           SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
