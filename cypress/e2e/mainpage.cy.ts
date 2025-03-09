@@ -17,40 +17,31 @@ describe('Тестирование критических компонентов
     });
   });
 
-  it('Мок тест', () => {
-    expect(typeof 'test' === 'string').equal(true);
-  });
+  it('Проверяем создание ссылки', () => {
+    cy.visit('/');
+    cy.getByTestId('contentField').type(content);
+    cy.getByTestId('passwordField').type(password);
 
-  it('Проверяем создание ссылки:', async () => {
-    cy.visit('http://localhost:3000/');
-    const contentField = cy.getByTestId('contentField');
-    const passwordField = cy.getByTestId('passwordField');
-
-    contentField.type(content);
-    passwordField.type(password);
-
-    const button = cy.getByTestId('createButton');
-    button.click();
+    cy.getByTestId('createButton').click();
 
     cy.getByTestId('successScreen').should('be.visible');
 
     cy.getByTestId('successFullCreateInput')
       .invoke('val')
       .then((value) => {
+        cy.log(`Созданная ссылка: ${value}`);
         expect(typeof value === 'string').equal(true);
         linkUrl = value as string;
       });
   });
-  it('Проверяем открытие ссылки:', () => {
+
+  it('Проверяем открытие ссылки', () => {
     cy.visit(linkUrl);
 
-    const passwordField = cy.getByTestId('passwordForOpen');
-    passwordField.type(password);
+    cy.getByTestId('passwordForOpen').type(password);
 
-    const openButton = cy.getByTestId('openButton');
-    openButton.click();
+    cy.getByTestId('openButton').click();
 
-    const contentField = cy.getByTestId('openedContent');
-    contentField.should('contain.text', content);
+    cy.getByTestId('openedContent').should('contain.text', content);
   });
 });
