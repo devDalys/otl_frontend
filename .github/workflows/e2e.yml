@@ -18,5 +18,5 @@ jobs:
           build: npm run build
           start: npm start
         env:
-          SERVER_SIDE_URL: ${{ env.SERVER_SIDE_URL }}
-          BACKAPI_URL: ${{ env.BACKAPI_URL }}
+          SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
+          BACKAPI_URL: ${{ vars.BACKAPI_URL }}
