@@ -17,6 +17,7 @@ jobs:
         with:
           build: npm run build
           start: npm start
+          wait-on: 'http://localhost:3000'
         env:
           SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
           BACKAPI_URL: ${{ vars.BACKAPI_URL }}
