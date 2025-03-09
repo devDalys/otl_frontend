@@ -22,3 +22,10 @@ jobs:
         env:
           SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
           BACKAPI_URL: ${{ vars.BACKAPI_URL }}
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
