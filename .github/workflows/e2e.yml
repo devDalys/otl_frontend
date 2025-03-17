@@ -25,7 +25,6 @@ jobs:
           echo "[Interface]
           PrivateKey = ${{ secrets.WG_PRIVATE_KEY }}
           Address = 10.0.0.3/24
-          DNS = 8.8.8.8
 
           [Peer]
           PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
@@ -36,7 +35,10 @@ jobs:
       - name: Start WireGuard VPN
         run: |
           sudo wg-quick up $HOME/wireguard/wg0.conf
-
+      - name: Check network access
+        run: |
+          ping -c 3 github.com
+          curl https://api.github.com
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
