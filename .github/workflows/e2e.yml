@@ -29,7 +29,7 @@ jobs:
           [Peer]
           PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
           Endpoint = ${{ vars.VPN_ENDPOINT }}
-          AllowedIPs = 0.0.0.0/0
+          AllowedIPs = 194.87.118.78/32
           PersistentKeepalive = 25" > $HOME/wireguard/wg0.conf
 
       - name: Start WireGuard VPN
