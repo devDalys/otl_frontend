@@ -38,8 +38,7 @@ jobs:
       - name: Проверка подключения
         run: |
           ip route
-          ping -c 3 backapi.onetimelink.ru || true
-          curl https://backapi.onetimelink.ru
+          curl -f https://backapi.onetimelink.ru/metrics || exit 1
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
