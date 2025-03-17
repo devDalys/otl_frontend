@@ -38,8 +38,8 @@ jobs:
       - name: Проверка подключения
         run: |
           ip route
-          ping -c 3 github.com || true
-          curl https://api.github.com
+          ping -c 3 ${{ vars.BACKAPI_URL }} || true
+          curl ${{ vars.BACKAPI_URL }}
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
