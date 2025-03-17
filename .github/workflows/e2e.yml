@@ -36,14 +36,15 @@ jobs:
       - name: Start WireGuard VPN
         run: |
           sudo wg-quick up $HOME/wireguard/wg0.conf
-      - name: Check network access
-        run: |
-          ping -c 3 github.com
-          curl https://api.github.com
 
       - name: Add custom routes
         run: |
           sudo ip route add 194.87.118.78 via 10.0.0.1 dev wg0
+
+      - name: Check network access
+        run: |
+          ping -c 3 github.com
+          curl https://api.github.com
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
