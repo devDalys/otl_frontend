@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - run: sudo apt install wireguard
-      - run: echo "${{ secrets.WIREGUARD_PRIVATE_KEY }}" > privatekey
+      - run: echo "${{ secrets.WG_PRIVATE_KEY }}" > privatekey
 
       - run: sudo ip link add dev wg0 type wireguard
 
