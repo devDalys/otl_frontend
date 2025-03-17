@@ -7,11 +7,11 @@ on:
     branches: ['main']
 
 jobs:
-  vpn:
+  e2e:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Install WireGuard
         run: |
@@ -34,14 +34,7 @@ jobs:
 
       - name: Start WireGuard VPN
         run: |
-          sudo wg-quick up $HOME/wireguard/wg0.conf || exit 1
-
-  e2e:
-    runs-on: ubuntu-24.04
-    needs: vpn
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+          sudo wg-quick up $HOME/wireguard/wg0.conf
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -49,7 +42,7 @@ jobs:
           build: npm run build
           start: npm run start
           browser: chrome
-          wait-on: 'http://localhost:3000'
+          wait-on: ${{ vars.SERVER_SIDE_URL }}
         env:
           SERVER_SIDE_URL: ${{ vars.SERVER_SIDE_URL }}
           BACKAPI_URL: ${{ vars.BACKAPI_URL }}
