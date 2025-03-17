@@ -25,6 +25,7 @@ jobs:
           echo "[Interface]
           PrivateKey = ${{ secrets.WG_PRIVATE_KEY }}
           Address = 10.0.0.3/24
+          Table = off
 
           [Peer]
           PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
@@ -39,6 +40,11 @@ jobs:
         run: |
           ping -c 3 github.com
           curl https://api.github.com
+
+      - name: Add custom routes
+        run: |
+          sudo ip route add 194.87.118.78 via 10.0.0.1 dev wg0
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
