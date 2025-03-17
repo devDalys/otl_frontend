@@ -34,7 +34,7 @@ jobs:
 
       - name: Start WireGuard VPN
         run: |
-          sudo wg-quick up $HOME/wireguard/wg0.conf
+          sudo wg-quick up $HOME/wireguard/wg0.conf || exit 1
 
   e2e:
     runs-on: ubuntu-24.04
