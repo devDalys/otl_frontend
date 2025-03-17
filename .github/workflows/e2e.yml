@@ -35,9 +35,10 @@ jobs:
 
       - name: Start WireGuard VPN
         run: |
+          echo "${{ secrets.WG_PRIVATE_KEY }}" > wg-private.key
           sudo ip link add dev wg0 type wireguard
           sudo ip address add 10.0.0.3/24 dev wg0
-          sudo wg set wg0 private-key <(echo "${{ secrets.WG_PRIVATE_KEY }}") \
+          sudo wg set wg0 private-key wg-private.key \
             peer ${{ secrets.WG_PUBLIC_KEY_SERVER }} \
             endpoint ${{ vars.VPN_ENDPOINT }} \
             allowed-ips 194.87.118.78/32 \
