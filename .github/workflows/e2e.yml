@@ -36,9 +36,7 @@ jobs:
         run: sudo ip route add 194.87.118.78 via 10.0.0.1 dev wg0
 
       - name: Проверка подключения
-        run: |
-          ip route
-          curl -f https://backapi.onetimelink.ru/metrics || exit 1
+        run: curl -f https://backapi.onetimelink.ru/metrics || exit 1
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
