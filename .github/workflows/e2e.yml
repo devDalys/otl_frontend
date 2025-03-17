@@ -7,8 +7,38 @@ on:
     branches: ['main']
 
 jobs:
+  vpn:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install WireGuard
+        run: |
+          sudo apt update
+          sudo apt install -y wireguard
+
+      - name: Setup WireGuard configuration
+        run: |
+          mkdir -p $HOME/wireguard
+          echo "[Interface]
+          PrivateKey = ${{ secrets.WG_PRIVATE_KEY }}
+          Address = 10.0.0.3/24
+          DNS = 8.8.8.8
+
+          [Peer]
+          PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
+          Endpoint = ${{ vars.VPN_ENDPOINT }}
+          AllowedIPs = 0.0.0.0/0
+          PersistentKeepalive = 25" > $HOME/wireguard/wg0.conf
+
+      - name: Start WireGuard VPN
+        run: |
+          sudo wg-quick up $HOME/wireguard/wg0.conf
+
   e2e:
     runs-on: ubuntu-24.04
+    needs: vpn
     steps:
       - name: Checkout
         uses: actions/checkout@v4
