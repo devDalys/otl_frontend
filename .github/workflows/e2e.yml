@@ -14,20 +14,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: sudo apt install wireguard
-      - run: echo "${{ secrets.WG_PRIVATE_KEY }}" > privatekey
+      - name: Install WireGuard
+        run: sudo apt update && sudo apt install -y wireguard
 
-      - run: sudo ip link add dev wg0 type wireguard
+      - name: Save WireGuard private key
+        run: echo "${{ secrets.WG_PRIVATE_KEY }}" > privatekey
 
-      - run: sudo ip address add dev wg0 10.0.0.2 peer 10.0.0.1
+      - name: Setup WireGuard interface
+        run: |
+          sudo ip link add dev wg0 type wireguard
+          sudo ip address add 10.0.0.2/32 dev wg0
+          sudo wg set wg0 listen-port 48123 \
+            private-key privatekey \
+            peer ${{ secrets.WG_PUBLIC_KEY_SERVER }} \
+            allowed-ips 194.87.118.78/32 \
+            endpoint ${{ vars.VPN_ENDPOINT }}
+          sudo ip link set up dev wg0
 
-      - run: sudo wg set wg0 listen-port 48123 private-key privatekey peer ${{ secrets.WG_PUBLIC_KEY_SERVER }} allowed-ips 194.87.118.78/32 endpoint ${{ vars.VPN_ENDPOINT }}
+      - name: Add route to VPN target
+        run: sudo ip route add 194.87.118.78 via 10.0.0.1 dev wg0
 
-      - run: sudo ip link set up dev wg0
+      - name: Check routing table (debug)
+        run: ip route
 
       - name: Check network access
         run: |
-          ping -c 3 github.com
+          ping -c 3 github.com || true
           curl https://api.github.com
 
       - name: Cypress run
