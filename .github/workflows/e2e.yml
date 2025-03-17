@@ -35,7 +35,7 @@ jobs:
       - name: Добавить маршрут только к VPN-адресу
         run: sudo ip route add 194.87.118.78 via 10.0.0.1 dev wg0
 
-      - name: Проверка подключения
+      - name: Проверка подключения из под впн
         run: curl -f https://backapi.onetimelink.ru/metrics || exit 1
 
       - name: Cypress run
