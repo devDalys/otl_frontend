@@ -31,6 +31,12 @@ jobs:
       - name: Start WireGuard
         run: sudo wg-quick up wg0
 
+      - name: Debug
+        run: |
+          ip -4 a
+          ip route
+          wg show wg0
+
       - name: Проверка curl через VPN
         run: |
           TARGET_DOMAIN=backapi.onetimelink.ru
