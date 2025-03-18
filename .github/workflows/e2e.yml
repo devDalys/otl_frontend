@@ -40,6 +40,7 @@ jobs:
       - name: Проверка curl через VPN
         run: |
           TARGET_DOMAIN=backapi.onetimelink.ru
+          echo 'GET / HTTP/1.1' | nc 194.87.118.78 443
           curl -v --connect-timeout 10 https://$TARGET_DOMAIN/metrics || exit 1
 
       - name: Cypress run
