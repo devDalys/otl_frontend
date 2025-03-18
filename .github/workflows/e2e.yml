@@ -35,7 +35,7 @@ jobs:
         run: |
           ip -4 a
           ip route
-          wg show wg0
+          sudo wg show wg0
 
       - name: Проверка curl через VPN
         run: |
