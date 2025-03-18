@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "[Interface]
           PrivateKey = ${{ secrets.WG_PRIVATE_KEY }}
-          Address = 10.0.0.2/32
+          Address = 10.0.0.3/32
 
           [Peer]
           PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
