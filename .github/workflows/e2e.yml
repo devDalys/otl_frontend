@@ -14,51 +14,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install WireGuard
-        run: sudo apt update && sudo apt install -y wireguard iproute2 dnsutils
-
-      - name: Сохранить приватный ключ WireGuard
-        run: echo "${{ secrets.WG_PRIVATE_KEY }}" > privatekey
-
-      - name: Настройка интерфейса WireGuard
-        run: |
-          sudo ip link add dev wg0 type wireguard
-          sudo ip address add dev wg0 10.0.0.3 peer 10.0.0.1
-          sudo wg set wg0 listen-port 48123 \
-            private-key privatekey \
-            peer ${{ secrets.WG_PUBLIC_KEY_SERVER }} \
-            allowed-ips 10.0.0.1/32,194.87.118.78/32 \
-            endpoint ${{ vars.VPN_ENDPOINT }} \
-            persistent-keepalive 25
-          sudo ip link set up dev wg0
-
-      - name: Проверка состояния VPN
-        run: |
-          sudo wg show
-          ip addr show wg0
-          ip route show
-
-      - name: Резолвинг IP и добавление маршрута через VPN
-        run: |
-          TARGET_DOMAIN=backapi.onetimelink.ru
-          TARGET_IP=$(dig +short $TARGET_DOMAIN | tail -n1)
-          echo "Resolved $TARGET_DOMAIN to $TARGET_IP"
-
-          VPN_IFACE=wg0
-          VPN_TABLE=100
-
-          # Создаем таблицу маршрутизации
-          echo "$VPN_TABLE vpn" | sudo tee -a /etc/iproute2/rt_tables
-
-          # Добавляем маршрут и правило
-          sudo ip route add $TARGET_IP/32 dev $VPN_IFACE table vpn
-          sudo ip rule add to $TARGET_IP/32 table vpn
-
-          echo "Проверка маршрута:"
-          ip route get $TARGET_IP
-
-          # ping для проверки доступности
-          ping -c 3 $TARGET_IP || echo "Ping не прошел"
+      - name: Set up WireGuard
+        uses: egor-tensin/setup-wireguard@v1
+        with:
+          endpoint: '${{ vars.VPN_ENDPOINT }}'
+          endpoint_public_key: '${{ secrets.WG_PUBLIC_KEY_SERVER }}'
+          ips: '10.0.0.3/24'
+          allowed_ips: '194.87.118.78/32'
+          private_key: '${{ secrets.WG_PRIVATE_KEY }}'
 
       - name: Проверка curl через VPN
         run: |
