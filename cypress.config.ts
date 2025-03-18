@@ -6,6 +6,6 @@ export default defineConfig({
       // implement node event listeners here
     },
     watchForFileChanges: false,
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3100',
   },
 });
