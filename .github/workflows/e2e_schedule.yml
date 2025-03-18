@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # позволяет запускать вручную через интерфейс GitHub
 
 jobs:
-  e2e:
+  scheduled_e2e:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
