@@ -8,17 +8,31 @@ on:
 
 jobs:
   e2e:
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up WireGuard
+        uses: egor-tensin/setup-wireguard@v1
+        with:
+          endpoint: '${{ vars.VPN_ENDPOINT }}'
+          endpoint_public_key: '${{ secrets.WG_PUBLIC_KEY_SERVER }}'
+          ips: '10.0.0.3/24'
+          allowed_ips: '194.87.118.78/32'
+          private_key: '${{ secrets.WG_PRIVATE_KEY }}'
+
+      - name: Проверка curl через VPN
+        run: |
+          TARGET_DOMAIN=backapi.onetimelink.ru
+          curl -v --connect-timeout 10 https://$TARGET_DOMAIN/metrics || exit 1
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
-          start: npm run start:autotests
+          start: npm run start
           browser: chrome
           wait-on: ${{ vars.SERVER_SIDE_URL }}
         env:
@@ -31,3 +45,13 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+
+      - name: Очистка маршрутов и VPN
+        if: always()
+        run: |
+          TARGET_IP=$(dig +short backapi.onetimelink.ru | tail -n1)
+          sudo ip rule del to $TARGET_IP/32 table vpn || true
+          sudo ip route flush table vpn || true
+          sudo sed -i '/100 vpn/d' /etc/iproute2/rt_tables || true
+          sudo ip link del wg0 || true
+          shred -u privatekey || true
