@@ -20,7 +20,7 @@ jobs:
           endpoint: '${{ vars.VPN_ENDPOINT }}'
           endpoint_public_key: '${{ secrets.WG_PUBLIC_KEY_SERVER }}'
           ips: '10.0.0.3/24'
-          allowed_ips: '194.87.118.78/32'
+          allowed_ips: '194.87.118.78'
           private_key: '${{ secrets.WG_PRIVATE_KEY }}'
 
       - name: Проверка curl через VPN
