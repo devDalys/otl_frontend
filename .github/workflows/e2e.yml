@@ -18,7 +18,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
-          start: npm run start -p 3100
+          start: npm run start:autotests
           browser: chrome
           wait-on: ${{ vars.SERVER_SIDE_URL }}
         env:
