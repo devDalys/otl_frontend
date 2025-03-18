@@ -8,41 +8,11 @@ on:
 
 jobs:
   e2e:
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install WireGuard
-        run: sudo apt-get update && sudo apt-get install -y wireguard
-
-      - name: Configure WireGuard
-        run: |
-          echo "[Interface]
-          PrivateKey = ${{ secrets.WG_PRIVATE_KEY }}
-          Address = 10.0.0.3/32
-
-          [Peer]
-          PublicKey = ${{ secrets.WG_PUBLIC_KEY_SERVER }}
-          Endpoint = ${{ vars.VPN_ENDPOINT }}
-          AllowedIPs = 194.87.118.78/32" | sudo tee /etc/wireguard/wg0.conf
-
-      - name: Start WireGuard
-        run: sudo wg-quick up wg0
-
-      - name: Debug
-        run: |
-          ip -4 a
-          ip route
-          sudo wg show wg0
-
-      - name: Проверка curl через VPN
-        run: |
-          TARGET_DOMAIN=backapi.onetimelink.ru
-          nc -u 79.137.244.105 51820
-          echo 'GET / HTTP/1.1' | nc 194.87.118.78 443
-          curl -v --connect-timeout 10 https://$TARGET_DOMAIN/metrics || exit 1
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
