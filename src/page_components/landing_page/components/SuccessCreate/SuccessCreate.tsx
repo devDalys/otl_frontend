@@ -35,17 +35,23 @@ export const SuccessCreate = ({setHref, href}: Props) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="successScreen">
       <div className={styles.image}></div>
       <h3 className={styles.title}>Ссылка создана! </h3>
       <div className={styles.inputWrapper}>
-        <Input value={href} disabled className={styles.input} />
+        <Input
+          value={href}
+          disabled
+          className={styles.input}
+          testId="successFullCreateInput"
+        />
       </div>
       <Button
         onClick={onCopy}
         size="xl"
         color="accent"
         className={styles.button}
+        testId="copyLink"
       >
         Скопировать ссылку
       </Button>

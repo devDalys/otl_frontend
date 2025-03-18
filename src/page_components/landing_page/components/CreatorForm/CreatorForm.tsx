@@ -112,6 +112,7 @@ export const CreatorForm = () => {
             maxLength={5000}
             errorMessage={error?.message}
             disabled={isLoading}
+            testId="contentField"
             {...field}
           />
         )}
@@ -127,6 +128,7 @@ export const CreatorForm = () => {
             disabled={isLoading}
             type="password"
             autoComplete="off"
+            testId="passwordField"
             {...field}
           />
         )}
@@ -164,7 +166,13 @@ export const CreatorForm = () => {
           )}
         />
       </div>
-      <Button size="xl" color="accent" type="submit" isLoading={isLoading}>
+      <Button
+        size="xl"
+        color="accent"
+        type="submit"
+        isLoading={isLoading}
+        testId="createButton"
+      >
         Создать
       </Button>
     </form>

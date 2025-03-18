@@ -8,6 +8,7 @@ import {useMemo, useState} from 'react';
 type Props = {
   errorMessage?: string;
   alias?: string;
+  testId?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = ({
@@ -15,6 +16,7 @@ export const Input = ({
   errorMessage,
   className,
   type,
+  testId,
   ...inputProps
 }: Props) => {
   const [inputType, setInputType] = useState(type);
@@ -32,6 +34,7 @@ export const Input = ({
             [styles.error]: errorMessage?.length,
           })}
           type={inputType}
+          data-testid={testId}
           {...inputProps}
         />
         {isPassword && (
