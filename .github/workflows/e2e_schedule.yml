@@ -16,6 +16,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+          config: baseUrl=https://onetimelink.ru
         env:
           SERVER_SIDE_URL: 'https://onetimelink.ru/api'
           BACKAPI_URL: ${{ vars.BACKAPI_URL }}
