@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install WireGuard
-        run: sudo apt update && sudo apt install -y wireguard iproute2
+        run: sudo apt update && sudo apt install -y wireguard iproute2 dnsutils
 
       - name: Сохранить приватный ключ WireGuard
         run: echo "${{ secrets.WG_PRIVATE_KEY }}" > privatekey
@@ -32,30 +32,38 @@ jobs:
             persistent-keepalive 25
           sudo ip link set up dev wg0
 
-      - name: Добавить маршрут и правило для трафика к 194.87.118.78 через VPN
+      - name: Проверка состояния VPN
         run: |
-          TARGET_IP=194.87.118.78
+          sudo wg show
+          ip addr show wg0
+          ip route show
+
+      - name: Резолвинг IP и добавление маршрута через VPN
+        run: |
+          TARGET_DOMAIN=backapi.onetimelink.ru
+          TARGET_IP=$(dig +short $TARGET_DOMAIN | tail -n1)
+          echo "Resolved $TARGET_DOMAIN to $TARGET_IP"
+
           VPN_IFACE=wg0
           VPN_TABLE=100
 
-          # Получить IP VPN интерфейса
-          VPN_LOCAL_IP=$(ip -4 addr show $VPN_IFACE | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n1)
-
-          # Добавить кастомную таблицу маршрутизации
+          # Создаем таблицу маршрутизации
           echo "$VPN_TABLE vpn" | sudo tee -a /etc/iproute2/rt_tables
 
-          # Добавить маршрут до IP через wg0
+          # Добавляем маршрут и правило
           sudo ip route add $TARGET_IP/32 dev $VPN_IFACE table vpn
-
-          # Добавить правило, чтобы трафик к IP шел через таблицу vpn
           sudo ip rule add to $TARGET_IP/32 table vpn
 
-          # Проверка маршрута
+          echo "Проверка маршрута:"
           ip route get $TARGET_IP
 
-      - name: Проверка подключения через VPN
+          # ping для проверки доступности
+          ping -c 3 $TARGET_IP || echo "Ping не прошел"
+
+      - name: Проверка curl через VPN
         run: |
-          curl -v --connect-timeout 10 https://backapi.onetimelink.ru/metrics || exit 1
+          TARGET_DOMAIN=backapi.onetimelink.ru
+          curl -v --connect-timeout 10 https://$TARGET_DOMAIN/metrics || exit 1
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -75,12 +83,10 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: 🧹 Очистка маршрутов и VPN
+      - name: Очистка маршрутов и VPN
         if: always()
         run: |
-          TARGET_IP=194.87.118.78
-          VPN_TABLE=100
-
+          TARGET_IP=$(dig +short backapi.onetimelink.ru | tail -n1)
           sudo ip rule del to $TARGET_IP/32 table vpn || true
           sudo ip route flush table vpn || true
           sudo sed -i '/100 vpn/d' /etc/iproute2/rt_tables || true
