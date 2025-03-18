@@ -1,0 +1,28 @@
+name: e2e
+
+on:
+  schedule:
+    - cron: '0 * * * *' # каждый час
+  workflow_dispatch: # позволяет запускать вручную через интерфейс GitHub
+
+jobs:
+  scheduled_e2e:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+        env:
+          SERVER_SIDE_URL: 'https://onetimelink.ru/api'
+          BACKAPI_URL: ${{ vars.BACKAPI_URL }}
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
