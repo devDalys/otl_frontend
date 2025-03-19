@@ -35,6 +35,9 @@ describe('Тестирование критических компонентов
   });
 
   it('Проверяем открытие ссылки', () => {
+    //Чтобы не стреляли рейтлимиты
+    cy.wait(1000);
+
     cy.visit(linkUrl);
 
     cy.getByTestId('passwordForOpen').type(password);
