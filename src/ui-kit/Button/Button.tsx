@@ -5,6 +5,7 @@ type Props = {
   size: 'sm' | 'xl';
   color: 'accent' | 'transparent';
   isLoading?: boolean;
+  testId?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
@@ -12,6 +13,7 @@ export const Button = ({
   color,
   className,
   isLoading,
+  testId,
   ...buttonProps
 }: Props) => {
   return (
@@ -23,6 +25,7 @@ export const Button = ({
         className,
         {[styles.isLoading]: isLoading},
       )}
+      data-testid={testId}
       {...buttonProps}
     >
       <div className={styles.children}>

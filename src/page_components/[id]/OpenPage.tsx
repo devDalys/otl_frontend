@@ -93,6 +93,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
                 type="password"
                 className={styles.input}
                 autoComplete="off"
+                testId="passwordForOpen"
                 {...field}
                 errorMessage={fieldState.error?.message}
               />
@@ -104,6 +105,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
             className={styles.formButton}
             isLoading={isLoading}
             type="submit"
+            testId="openButton"
           >
             Открыть
           </Button>

@@ -18,7 +18,9 @@ export const OpenedContent = ({content}: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.content}>{content}</div>
+      <div className={styles.content} data-testid="openedContent">
+        {content}
+      </div>
       <Button
         size="xl"
         color="accent"

@@ -82,7 +82,7 @@ export const CreatorForm = () => {
   const onSuccess = (data: CreateResponse) => {
     scrollToTop();
     reset();
-    const link = `${document.location.host}/${data.body.href}`;
+    const link = `${document.location.origin}/${data.body.href}`;
     setCreatedHref(link);
     historyActions.add({link, timestamp: Date.now(), type: 'creating'});
   };
@@ -118,6 +118,7 @@ export const CreatorForm = () => {
             maxLength={5000}
             errorMessage={error?.message}
             disabled={isLoading}
+            testId="contentField"
             {...field}
           />
         )}
@@ -133,6 +134,7 @@ export const CreatorForm = () => {
             disabled={isLoading}
             type="password"
             autoComplete="off"
+            testId="passwordField"
             {...field}
           />
         )}
@@ -176,6 +178,7 @@ export const CreatorForm = () => {
         type="submit"
         isLoading={isLoading}
         className={styles.button}
+        testId="createButton"
       >
         {t('create')}
       </Button>

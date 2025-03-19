@@ -7,12 +7,14 @@ type Props = {
   alias: string;
   maxLength: number;
   errorMessage?: string;
+  testId?: string;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export const Textarea = ({
   alias,
   maxLength,
   errorMessage,
+  testId,
   ...textAreaProps
 }: Props) => {
   return (
@@ -26,6 +28,7 @@ export const Textarea = ({
         >{`${(textAreaProps?.value as string)?.length ?? 0} / ${maxLength}`}</span>
       </div>
       <textarea
+        data-testid={testId}
         className={classNames(styles.textarea, {
           [styles.error]: errorMessage?.length,
         })}
