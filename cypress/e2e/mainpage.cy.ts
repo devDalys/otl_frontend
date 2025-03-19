@@ -26,13 +26,12 @@ describe('Тестирование критических компонентов
 
     cy.getByTestId('successScreen').should('be.visible');
 
-    cy.getByTestId('successFullCreateInput')
-      .invoke('content')
-      .then((value) => {
-        cy.log(`Созданная ссылка: ${value}`);
-        expect(typeof value === 'string').equal(true);
-        linkUrl = value as string;
-      });
+    cy.getByTestId('successFullCreateInput').then((value) => {
+      const url = value.attr('content');
+      cy.log(`Созданная ссылка: ${url}`);
+      expect(typeof url === 'string').equal(true);
+      linkUrl = url as string;
+    });
   });
 
   it('Проверяем открытие ссылки', () => {
