@@ -27,7 +27,7 @@ describe('Тестирование критических компонентов
     cy.getByTestId('successScreen').should('be.visible');
 
     cy.getByTestId('successFullCreateInput')
-      .invoke('val')
+      .invoke('content')
       .then((value) => {
         cy.log(`Созданная ссылка: ${value}`);
         expect(typeof value === 'string').equal(true);

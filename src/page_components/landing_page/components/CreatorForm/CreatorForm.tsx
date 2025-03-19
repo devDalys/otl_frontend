@@ -76,7 +76,7 @@ export const CreatorForm = () => {
   const onSuccess = (data: CreateResponse) => {
     scrollToTop();
     reset();
-    const link = `${document.location.host}/${data.body.href}`;
+    const link = `${document.location.origin}/${data.body.href}`;
     setCreatedHref(link);
     historyActions.add({link, timestamp: Date.now(), type: 'creating'});
   };
