@@ -17,12 +17,13 @@ type Props = {
 
 export const SuccessCreate = ({setHref, href}: Props) => {
   const {showSnack} = useSnackbar();
+  const t = useTranslations('successScreen');
+
   const {share, isCanShare} = useShare({
     url: href,
     title: 'OneTimeLink',
-    text: 'Одноразовая ссылка, перейдите по ссылке чтобы открыть её.',
+    text: t('одноразовая_ссылка'),
   });
-  const t = useTranslations('successScreen');
   const onCopy = () => {
     emitYmEvent('copyButtonClick');
     navigator.clipboard.writeText(href);

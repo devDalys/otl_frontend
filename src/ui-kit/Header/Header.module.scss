@@ -2,12 +2,15 @@
 
 .header {
   display: flex;
-  width: calc(100vw - var(--removed-body-scroll-bar-size));
+  // width: calc(100vw - var(--removed-body-scroll-bar-size));
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
   height: max-content;
   z-index: 100;
   background: transparent;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 24px 0;
   @include breakpoint-to(720px) {
     padding: 14px 0;
@@ -19,6 +22,7 @@
   max-width: 1280px;
   width: 100%;
   align-items: center;
+  justify-content: center;
 }
 
 .logo {
@@ -26,14 +30,14 @@
   position: relative;
   width: 80px;
   height: 40px;
-  margin-right: 64px;
+  // margin-right: 64px;
 }
 
 .link {
   font-size: 18px;
   font-weight: 24px;
   font-weight: 500;
-  margin-right: 8px;
+  // margin-right: 8px;
   padding: 8px 40px;
 }
 

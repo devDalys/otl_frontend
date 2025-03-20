@@ -1,8 +1,10 @@
 'use client';
 
 import styles from './OpenedContent.module.scss';
+import {useLocale} from '@/hooks/useLocale';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
+import {useTranslations} from 'next-intl';
 import Link from 'next/link';
 
 type Props = {
@@ -11,10 +13,13 @@ type Props = {
 
 export const OpenedContent = ({content}: Props) => {
   const {showSnack} = useSnackbar();
+  const t = useTranslations('openScreen');
+  const locale = useLocale();
   const onCopy = () => {
     navigator.clipboard.writeText(content);
-    showSnack({title: 'Содержимое скопировано'});
+    showSnack({title: t('уведомление')});
   };
+  const href = locale === 'en' ? '/en' : '/';
 
   return (
     <div className={styles.wrapper}>
@@ -27,11 +32,11 @@ export const OpenedContent = ({content}: Props) => {
         className={styles.button}
         onClick={onCopy}
       >
-        Скопировать содержимое
+        {t('копировать')}
       </Button>
-      <Link href="/">
+      <Link href={href}>
         <Button size="xl" color="transparent" className={styles.createButton}>
-          Создать новую ссылку
+          {t('создать_ссылку')}
         </Button>
       </Link>
     </div>

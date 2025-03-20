@@ -1,0 +1,28 @@
+@import '@/app/mixins';
+
+.h1 {
+  @include h1;
+  text-align: left;
+}
+.h2 {
+  @include h2;
+  text-align: left;
+
+  a {
+    color: var(--surface-accent);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 32px auto;
+  max-width: 820px;
+  width: 100%;
+  justify-content: flex-start;
+  form {
+    width: 100%;
+    max-width: 820px;
+    margin: 24px auto;
+  }
+}

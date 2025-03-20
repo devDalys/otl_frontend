@@ -2,6 +2,7 @@
 
 import styles from './CreatorForm.module.scss';
 import {api} from '@/api/api';
+import {useLocale} from '@/hooks/useLocale';
 import {SuccessCreate} from '@/page_components/landing_page/components/SuccessCreate/SuccessCreate';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {SuccessResponse} from '@/types/responses';
@@ -31,7 +32,7 @@ type CreateResponse = SuccessResponse<{
   href: string;
 }>;
 
-const selectCountVariants = (t: any) => [
+const selectCountVariants = (t: ReturnType<typeof useTranslations>) => [
   {value: '1', label: '1'},
   {value: '2', label: '2'},
   {value: '3', label: '3'},
@@ -42,7 +43,7 @@ const selectCountVariants = (t: any) => [
   {value: '100', label: '100'},
   {value: 'Infinity', label: t('Неограниченно')},
 ];
-const selectStaleVariants = (t: any) => [
+const selectStaleVariants = (t: ReturnType<typeof useTranslations>) => [
   {value: '5m', label: t('5 минут')},
   {value: '30m', label: t('30 минут')},
   {value: '1h', label: t('1 час')},
@@ -54,7 +55,7 @@ const selectStaleVariants = (t: any) => [
   {value: '1y', label: t('1 год')},
 ];
 
-const schema = (t: any) =>
+const schema = (t: ReturnType<typeof useTranslations>) =>
   yup.object().shape({
     content: yup
       .string()
@@ -72,6 +73,7 @@ const schema = (t: any) =>
 export const CreatorForm = () => {
   const {showSnack} = useSnackbar();
   const [createdHref, setCreatedHref] = useState('');
+  const locale = useLocale();
   const {mutate, isLoading} = useMutation({
     mutationFn: (data: Form) => api.post<CreateResponse>('/link/create', data),
     onSuccess: (data) => onSuccess(data.data),
@@ -82,7 +84,7 @@ export const CreatorForm = () => {
   const onSuccess = (data: CreateResponse) => {
     scrollToTop();
     reset();
-    const link = `${document.location.origin}/${data.body.href}`;
+    const link = `${document.location.origin}${locale === 'en' ? '/en' : ''}/${data.body.href}`;
     setCreatedHref(link);
     historyActions.add({link, timestamp: Date.now(), type: 'creating'});
   };

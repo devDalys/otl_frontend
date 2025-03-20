@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   //Серверный прокси до бекенда
   if (url.pathname.startsWith('/api')) {
-    console.log('Вызов API');
     const clientIp =
       request.headers.get('x-real-ip') || request.ip || '127.0.0.1';
 

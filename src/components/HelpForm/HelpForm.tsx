@@ -9,7 +9,7 @@ import {Textarea} from '@/ui-kit/Textarea/Textarea';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useTranslations} from 'next-intl';
+import {MessageKeys, useTranslations} from 'next-intl';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
 import * as yup from 'yup';
@@ -21,10 +21,10 @@ type Form = {
 };
 
 type Props = {
-  hideModal: () => void;
+  onSuccess?: () => void;
 };
 
-const schema = (t: any) =>
+const schema = (t: ReturnType<typeof useTranslations>) =>
   yup.object().shape({
     name: yup
       .string()
@@ -42,7 +42,7 @@ const schema = (t: any) =>
       .email(t('неверная_почта')),
   });
 
-export const HelpForm = ({hideModal}: Props) => {
+export const HelpForm = ({onSuccess: hideModal}: Props) => {
   const {showSnack} = useSnackbar();
   const t = useTranslations('feedbackform');
   const {isLoading, mutate} = useMutation({
@@ -55,7 +55,7 @@ export const HelpForm = ({hideModal}: Props) => {
         description: t('рассмотрение_обращения'),
       });
       reset();
-      hideModal();
+      hideModal?.();
     },
     onError: (error) => showError(error, showSnack),
   });

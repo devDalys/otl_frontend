@@ -14,7 +14,7 @@ export const Footer = () => {
     createModal({
       title: t('обратная_связь'),
       subtitle: t('напишите_нам'),
-      content: <HelpForm hideModal={hideModal} />,
+      content: <HelpForm onSuccess={hideModal} />,
     });
   };
 

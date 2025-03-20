@@ -25,9 +25,9 @@ export const Header = () => {
           <Link href={languagePrefix + '/help'} className={styles.link}>
             {t('support')}
           </Link>
-          <Link href={languagePrefix + '/updates'} className={styles.link}>
+          {/* <Link href={languagePrefix + '/updates'} className={styles.link}>
             {t('updates')}
-          </Link>
+          </Link> */}
         </div>
         <div className={styles.rightSide}>
           <LanguageSwitcher />

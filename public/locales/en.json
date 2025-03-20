@@ -102,5 +102,33 @@
     "скопировать_ссылку": "Copy link",
     "поделиться_ссылкой": "Share link",
     "создать_новую_ссылку": "Create a new link"
+  },
+  "openScreen": {
+    "инструкция": "Click \"Open\"\n to view the contents.",
+    "предупреждение": "If you don't know what this link is — do not attempt to open it.\nOneTimeLink is not responsible for its contents.",
+    "открыть": "Open",
+    "копировать": "Copy contents",
+    "создать_ссылку": "Create new link",
+    "введите_пароль": "Enter password to view the contents",
+    "пароль": "Password",
+    "уведомление": "Contents copied"
+  },
+  "notFoundSlug": {
+    "ошибка": "Link not found",
+    "описание": "It may have expired\nor reached its view limit.",
+    "действие": "Create new"
+  },
+  "historyScreen": {
+    "создание": "Creating link",
+    "открытие": "Opening link",
+    "успех": "History cleared successfully",
+    "информация": "You haven't created or opened any links yet",
+    "действие": "Clear history",
+    "уведомление": "Link copied"
+  },
+  "helpPage": {
+    "h1": "Help and contacts",
+    "h2": "If you have any questions, suggestions or problems when using the service - write to us! We will try to answer as soon as possible.",
+    "contactUs": "<href>Email us</href>, or through the form below."
   }
 }
