@@ -50,7 +50,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
     onSuccess: ({data}) => {
       setContent(data.body.content);
       historyActions.add({
-        link: `${document.location.host}/${id}`,
+        link: `${document.location.origin}/${id}`,
         timestamp: Date.now(),
         type: 'opening',
       });

@@ -4,8 +4,10 @@ import {LanguageSwitcher} from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.scss';
 import {useLocale} from '@/hooks/useLocale';
 import {useTranslations} from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
-import Logo from 'public/images/Logo.svg';
+//@ts-ignore
+import Logo from 'public/images/Logo.svg?url';
 
 export const Header = () => {
   const locale = useLocale();
@@ -16,9 +18,15 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <span className={styles.logo}>
-          <Logo />
+          <Image
+            src={Logo.src}
+            width={80}
+            height={40}
+            alt="OneTimeLink"
+            className={styles.logo}
+          />
         </span>
-        <div>
+        <div className={styles.links}>
           <Link href={languagePrefix + '/'} className={styles.link}>
             {t('home')}
           </Link>

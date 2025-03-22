@@ -58,6 +58,7 @@ export const History = () => {
           <div
             key={index}
             className={styles.link}
+            data-testid="historyItem"
             onClick={() => onCopy(link.link)}
           >
             <div className={styles.header}>

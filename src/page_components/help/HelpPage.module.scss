@@ -14,6 +14,11 @@
 }
 
 .wrapper {
+  width: calc(100vw - var(--removed-body-scroll-bar-size));
+}
+
+.container {
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   margin: 32px auto;
