@@ -53,6 +53,7 @@ export const HelpForm = ({onSuccess: hideModal}: Props) => {
       showSnack({
         title: t('спасибо_за_обращение'),
         description: t('рассмотрение_обращения'),
+        testId: 'formNotification',
       });
       reset();
       hideModal?.();
@@ -89,6 +90,7 @@ export const HelpForm = ({onSuccess: hideModal}: Props) => {
             disabled={isLoading}
             {...field}
             autoComplete="name"
+            testId="helpName"
           />
         )}
       />
@@ -103,6 +105,7 @@ export const HelpForm = ({onSuccess: hideModal}: Props) => {
             errorMessage={error?.message}
             disabled={isLoading}
             {...field}
+            testId="helpContent"
           />
         )}
       />
@@ -116,6 +119,7 @@ export const HelpForm = ({onSuccess: hideModal}: Props) => {
             errorMessage={error?.message}
             disabled={isLoading}
             autoComplete="email"
+            testId="helpEmail"
             {...field}
           />
         )}
@@ -127,6 +131,7 @@ export const HelpForm = ({onSuccess: hideModal}: Props) => {
         color="accent"
         type="submit"
         className={styles.button}
+        testId="helpSubmitButton"
       >
         {t('отправить')}
       </Button>
