@@ -11,6 +11,7 @@ import {historyActions} from '@/utils/history';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {useTranslations} from 'next-intl';
 import {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
@@ -22,17 +23,20 @@ type Props = {
 };
 
 type Response = SuccessResponse<{content: string}>;
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .max(20, 'Максимальная длина поля: 20')
-    .required('Обязательное поле'),
-});
+const schema = (t: ReturnType<typeof useTranslations>) =>
+  yup.object().shape({
+    password: yup
+      .string()
+      .max(20, t('максимальная_длина_поля', {value: 20}))
+      .required(t('обязательное_поле')),
+  });
 export const OpenPage = ({withPassword, id}: Props) => {
   const [content, setContent] = useState('');
+  const t = useTranslations('openScreen');
+  const f = useTranslations('form');
   const {showSnack} = useSnackbar();
   const {control, handleSubmit, reset} = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(f)),
     defaultValues: {
       password: '',
     },
@@ -46,7 +50,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
     onSuccess: ({data}) => {
       setContent(data.body.content);
       historyActions.add({
-        link: `${document.location.host}/${id}`,
+        link: `${document.location.origin}/${id}`,
         timestamp: Date.now(),
         type: 'opening',
       });
@@ -65,20 +69,9 @@ export const OpenPage = ({withPassword, id}: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      {!withPassword && (
-        <h1 className={styles.h1}>
-          Нажмите "Открыть" чтобы
-          <br />
-          просмотреть содержимое
-        </h1>
-      )}
-      {withPassword && (
-        <h1 className={styles.h1}>Введите пароль для просмотра содержимого</h1>
-      )}
-      <h2 className={styles.h2}>
-        Если Вы не знаете, что это за ссылка - не пытайтесь открыть её.
-        <br /> OneTimeLink не несет ответственности за её содержимое.
-      </h2>
+      {!withPassword && <h1 className={styles.h1}>{t('инструкция')}</h1>}
+      {withPassword && <h1 className={styles.h1}>{t('введите_пароль')}</h1>}
+      <h2 className={styles.h2}>{t('предупреждение')}</h2>
       {withPassword && (
         <form
           className={styles.form}
@@ -89,7 +82,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
             name="password"
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
-                alias="Пароль"
+                alias={t('пароль')}
                 type="password"
                 className={styles.input}
                 autoComplete="off"
@@ -107,7 +100,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
             type="submit"
             testId="openButton"
           >
-            Открыть
+            {t('открыть')}
           </Button>
         </form>
       )}
@@ -119,7 +112,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
           onClick={() => onOpenClick('')}
           isLoading={isLoading}
         >
-          Открыть
+          {t('открыть')}
         </Button>
       )}
     </div>

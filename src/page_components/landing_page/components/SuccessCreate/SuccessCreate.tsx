@@ -7,6 +7,7 @@ import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
 import {scrollToTop} from '@/utils/scrollToTop';
 import {emitYmEvent} from '@/utils/ymEvent';
+import {useTranslations} from 'next-intl';
 import {SetStateAction, useMemo} from 'react';
 
 type Props = {
@@ -16,17 +17,19 @@ type Props = {
 
 export const SuccessCreate = ({setHref, href}: Props) => {
   const {showSnack} = useSnackbar();
+  const t = useTranslations('successScreen');
+
   const {share, isCanShare} = useShare({
     url: href,
     title: 'OneTimeLink',
-    text: 'Одноразовая ссылка, перейдите по ссылке чтобы открыть её.',
+    text: t('одноразовая_ссылка'),
   });
   const onCopy = () => {
     emitYmEvent('copyButtonClick');
     navigator.clipboard.writeText(href);
     showSnack({
-      title: 'Ссылка скопирована',
-      description: 'Поделитесь ей любым удобным для Вас способом',
+      title: t('ссылка_скопирована'),
+      description: t('поделитесь_ссылкой'),
     });
   };
   const onShare = () => {
@@ -41,7 +44,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
   return (
     <div className={styles.wrapper} data-testid="successScreen">
       <div className={styles.image}></div>
-      <h3 className={styles.title}>Ссылка создана! </h3>
+      <h3 className={styles.title}>{t('ссылка_создана')}</h3>
       <div className={styles.inputWrapper}>
         <Input
           value={valueForInput}
@@ -58,7 +61,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
         className={styles.button}
         testId="copyLink"
       >
-        Скопировать ссылку
+        {t('скопировать_ссылку')}
       </Button>
       {isCanShare && (
         <Button
@@ -67,7 +70,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
           color="transparent"
           className={styles.button}
         >
-          Поделиться ссылкой
+          {t('поделиться_ссылкой')}
         </Button>
       )}
       <Button
@@ -79,7 +82,7 @@ export const SuccessCreate = ({setHref, href}: Props) => {
         color="transparent"
         className={styles.button}
       >
-        Создать новую ссылку
+        {t('создать_новую_ссылку')}
       </Button>
     </div>
   );

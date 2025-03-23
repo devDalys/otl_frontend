@@ -1,0 +1,12 @@
+@import '@/app/mixins';
+
+.select.select {
+  // border: none;
+  background: transparent;
+  font-weight: 500;
+  padding: 8px 20px;
+
+  @include breakpoint-to(720px) {
+    padding: 8px 10px;
+  }
+}

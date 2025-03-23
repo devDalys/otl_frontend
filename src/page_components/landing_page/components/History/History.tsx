@@ -5,6 +5,7 @@ import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {historyActions, HistoryLink} from '@/utils/history';
 import {emitYmEvent} from '@/utils/ymEvent';
+import {useTranslations} from 'next-intl';
 import {useState} from 'react';
 
 const mock = [
@@ -20,38 +21,35 @@ const mock = [
   },
 ] as HistoryLink[];
 
-const textByType = {
-  creating: 'Создание',
-  opening: 'Открытие',
-};
-
 export const History = () => {
   const [history, setHistory] = useState<Array<HistoryLink>>(
     historyActions.get(),
   );
+
+  const t = useTranslations();
   const {showSnack} = useSnackbar();
+
+  const textByType = {
+    creating: t('historyScreen.создание'),
+    opening: t('historyScreen.открытие'),
+  };
 
   const onCopy = (link: string) => {
     emitYmEvent('copyButtonClick');
     navigator.clipboard.writeText(link);
     showSnack({
-      title: 'Ссылка скопирована',
+      title: t('historyScreen.уведомление'),
     });
   };
   const onDeleteAll = () => {
     emitYmEvent('deleteHistory');
     setHistory([]);
     historyActions.deleteAll();
-    showSnack({title: 'История успешно очищена'});
+    showSnack({title: t('historyScreen.успех')});
   };
 
   if (!history.length)
-    return (
-      <div className={styles.empty}>
-        Вы пока не создавали и <br />
-        не открывали ссылок
-      </div>
-    );
+    return <div className={styles.empty}>{t('historyScreen.информация')}</div>;
 
   return (
     <>
@@ -60,10 +58,11 @@ export const History = () => {
           <div
             key={index}
             className={styles.link}
+            data-testid="historyItem"
             onClick={() => onCopy(link.link)}
           >
             <div className={styles.header}>
-              <span>{textByType[link.type]} ссылки</span>
+              <span>{textByType[link.type]}</span>
               <span>{new Date(+link.timestamp).toLocaleString()}</span>
             </div>
             {link.link}
@@ -76,7 +75,7 @@ export const History = () => {
         color="transparent"
         className={styles.button}
       >
-        Очистить историю
+        {t('historyScreen.действие')}
       </Button>
     </>
   );

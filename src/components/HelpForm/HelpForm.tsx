@@ -9,6 +9,7 @@ import {Textarea} from '@/ui-kit/Textarea/Textarea';
 import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {MessageKeys, useTranslations} from 'next-intl';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
 import * as yup from 'yup';
@@ -20,36 +21,42 @@ type Form = {
 };
 
 type Props = {
-  hideModal: () => void;
+  onSuccess?: () => void;
 };
 
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required('Обязательное поле')
-    .max(30, 'Максимальная длина поля: 30')
-    .min(2, 'Минимальная длина поля: 2'),
-  content: yup
-    .string()
-    .required('Обязательное поле')
-    .max(2000, 'Максимальная длина поля: 2000')
-    .min(50, 'Минимальная длина поля: 50'),
-  email: yup.string().email('Неверный формат почты'),
-});
+const schema = (t: ReturnType<typeof useTranslations>) =>
+  yup.object().shape({
+    name: yup
+      .string()
+      .required(t('обязательное_поле'))
+      .max(30, t('максимальная_длина_поля', {value: 30}))
+      .min(2, t('минимальная_длина_поля', {value: 2})),
+    content: yup
+      .string()
+      .required(t('обязательное_поле'))
+      .max(2000, t('максимальная_длина_поля', {value: 2000}))
+      .min(50, t('минимальная_длина_поля', {value: 50})),
+    email: yup
+      .string()
+      .required(t('обязательное_поле'))
+      .email(t('неверная_почта')),
+  });
 
-export const HelpForm = ({hideModal}: Props) => {
+export const HelpForm = ({onSuccess: hideModal}: Props) => {
   const {showSnack} = useSnackbar();
+  const t = useTranslations('feedbackform');
   const {isLoading, mutate} = useMutation({
     mutationFn: (data: Form) => {
       return api.post('/feedback/public', data);
     },
     onSuccess: () => {
       showSnack({
-        title: 'Спасибо за обращение',
-        description: 'Мы обязательно рассмотрим его в ближайшее время',
+        title: t('спасибо_за_обращение'),
+        description: t('рассмотрение_обращения'),
+        testId: 'formNotification',
       });
       reset();
-      hideModal();
+      hideModal?.();
     },
     onError: (error) => showError(error, showSnack),
   });
@@ -60,7 +67,7 @@ export const HelpForm = ({hideModal}: Props) => {
       email: '',
       name: '',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema(t)),
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
@@ -77,12 +84,13 @@ export const HelpForm = ({hideModal}: Props) => {
         control={control}
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Input
-            placeholder="Петр"
-            alias="Как к вам обращаться"
+            placeholder={t('fakename')}
+            alias={t('как_к_вам_обращаться')}
             errorMessage={error?.message}
             disabled={isLoading}
             {...field}
             autoComplete="name"
+            testId="helpName"
           />
         )}
       />
@@ -91,12 +99,13 @@ export const HelpForm = ({hideModal}: Props) => {
         control={control}
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Textarea
-            placeholder="Предлагаю сделать личный кабинет, чтобы я мог..."
-            alias="Обращение"
+            placeholder={t('предложение_личного_кабинета')}
+            alias={t('обращение')}
             maxLength={2000}
             errorMessage={error?.message}
             disabled={isLoading}
             {...field}
+            testId="helpContent"
           />
         )}
       />
@@ -105,11 +114,12 @@ export const HelpForm = ({hideModal}: Props) => {
         control={control}
         render={({field: {ref, ...field}, fieldState: {error}}) => (
           <Input
-            alias="Почта для ответа"
-            placeholder="petya@mail.ru"
+            alias={t('почта_для_ответа')}
+            placeholder={t('fakemail')}
             errorMessage={error?.message}
             disabled={isLoading}
             autoComplete="email"
+            testId="helpEmail"
             {...field}
           />
         )}
@@ -121,8 +131,9 @@ export const HelpForm = ({hideModal}: Props) => {
         color="accent"
         type="submit"
         className={styles.button}
+        testId="helpSubmitButton"
       >
-        Отправить
+        {t('отправить')}
       </Button>
     </form>
   );

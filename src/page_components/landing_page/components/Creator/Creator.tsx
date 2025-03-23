@@ -3,10 +3,9 @@
 import styles from './Creator.module.scss';
 import {CreatorForm} from '@/page_components/landing_page/components/CreatorForm/CreatorForm';
 import {History} from '@/page_components/landing_page/components/History/History';
-import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {emitYmEvent} from '@/utils/ymEvent';
 import * as Tabs from '@radix-ui/react-tabs';
-import classNames from 'classnames';
+import {useTranslations} from 'next-intl';
 import React from 'react';
 
 export const Creator = ({}) => {
@@ -20,6 +19,7 @@ export const Creator = ({}) => {
       screen: <History />,
     },
   };
+  const t = useTranslations('mainpage');
 
   return (
     <Tabs.Root className={styles.Root} defaultValue={screens.create.name}>
@@ -28,14 +28,14 @@ export const Creator = ({}) => {
           className={styles.triggers__button}
           value={screens.create.name}
         >
-          Создание ссылки
+          {t('createTab')}
         </Tabs.Trigger>
         <Tabs.Trigger
           className={styles.triggers__button}
           value={screens.history.name}
           data-testid="historyButton"
         >
-          История
+          {t('historyTab')}
         </Tabs.Trigger>
       </Tabs.List>
       <Tabs.Content className={styles.content} value={screens.create.name}>

@@ -20,6 +20,7 @@ export type TSnackbarElem = {
     action: () => void;
   };
   type?: 'error' | 'default';
+  testId?: string;
 };
 
 const SnackbarContext = React.createContext<TSnackbarContext>({
@@ -49,12 +50,14 @@ const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     delay = 3000,
     button,
     type = 'default',
+    testId,
   }: TSnackbarElem & {id: string}) => {
     return (
       <Toast.Root
         className={classNames(styles.root, {
           [styles.root__error]: type === 'error',
         })}
+        data-testid={testId}
         duration={delay}
         onOpenChange={() => handleHide(id)}
       >

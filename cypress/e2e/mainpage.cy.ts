@@ -46,4 +46,17 @@ describe('Тестирование критических компонентов
 
     cy.getByTestId('openedContent').should('contain.text', content);
   });
+
+  it('Проверяем историю, где должно быть открытие и создание ссылки', () => {
+    cy.visit('/');
+    cy.getByTestId('historyButton').click();
+    cy.getByTestId('historyItem').should('have.length', 2);
+
+    const history = JSON.parse(localStorage.getItem('LOCAL_HISTORY') as string);
+    const historyActionsWithLink = history.find(
+      (item: any) => item.link === linkUrl,
+    );
+
+    expect(historyActionsWithLink.length === 2);
+  });
 });

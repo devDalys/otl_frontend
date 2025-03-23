@@ -7,10 +7,12 @@ import TooltipIcon from 'public/icons/Tooltip.svg';
 import React from 'react';
 
 type Props = {
-  alias: string;
+  alias?: string;
   items: Array<{label: string; value: string}>;
   errorMessage?: string;
   tooltipText?: string;
+  withErrors?: boolean;
+  className?: string;
 } & SelectProps;
 
 export const Select = ({
@@ -20,6 +22,8 @@ export const Select = ({
   defaultValue,
   errorMessage,
   tooltipText,
+  className,
+  withErrors = true,
   ...selectProps
 }: Props) => {
   const defaultValueLabel = items?.find(
@@ -28,20 +32,22 @@ export const Select = ({
 
   return (
     <div className={styles.wrapper}>
-      <span className={styles.alias}>
-        {alias}
-        {tooltipText?.length ? (
-          <Tooltip text={tooltipText}>
-            <span className={styles.tooltip}>
-              <TooltipIcon />
-            </span>
-          </Tooltip>
-        ) : null}
-      </span>
+      {(alias || tooltipText?.length) && (
+        <span className={styles.alias}>
+          {alias}
+          {tooltipText?.length ? (
+            <Tooltip text={tooltipText}>
+              <span className={styles.tooltip}>
+                <TooltipIcon />
+              </span>
+            </Tooltip>
+          ) : null}
+        </span>
+      )}
 
-      <SelectRadix.Root {...selectProps}>
+      <SelectRadix.Root {...selectProps} disabled={selectProps.disabled}>
         <SelectRadix.Trigger
-          className={classNames(styles.select, {
+          className={classNames(className, styles.select, {
             [styles.error]: errorMessage?.length,
           })}
           aria-label="Выбор языка"
@@ -66,7 +72,9 @@ export const Select = ({
           </SelectRadix.Viewport>
         </SelectRadix.Content>
       </SelectRadix.Root>
-      <span className={styles.errorMessage}>{errorMessage}</span>
+      {!withErrors && (
+        <span className={styles.errorMessage}>{errorMessage}</span>
+      )}
     </div>
   );
 };
