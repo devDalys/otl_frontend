@@ -4,6 +4,7 @@ import {Select} from '../Select/Select';
 import styles from './LanguageSwitcher.module.scss';
 import {useLocale} from '@/hooks/useLocale';
 import {setUserLocale} from '@/i18n/utils';
+import {emitYmEvent} from '@/utils/ymEvent';
 import {usePathname, useRouter} from 'next/navigation';
 import {useTransition} from 'react';
 
@@ -16,6 +17,7 @@ export const LanguageSwitcher = () => {
   const onSelect = (value: 'ru' | 'en') => {
     const prefix = value === 'en' ? '/en' : '';
     const path = prefix + pathName.replace('/en', '') || '/';
+    emitYmEvent('switchLanguage');
     startTransition(() => {
       setUserLocale(locale);
     });
