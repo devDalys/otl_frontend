@@ -35,7 +35,7 @@ const cspHeader = `
     https://*.yandex.ru 
     https://*.adfox.ru 
     https://yandex.ru 
-    https://yandex.com 
+    https://*.yandex.com 
     https://verify.yandex.ru 
     https://www.google.com/recaptcha/ 
     https://www.gstatic.com/recaptcha/ 
