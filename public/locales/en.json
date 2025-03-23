@@ -130,5 +130,8 @@
     "h1": "Help and contacts",
     "h2": "If you have any questions, suggestions or problems when using the service - write to us! We will try to answer as soon as possible.",
     "contactUs": "<href>Email us</href>, or through the form below."
+  },
+  "toManyRequest": {
+    "error": "We've detected\ntoo many requests from you."
   }
 }
