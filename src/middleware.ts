@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from 'next/server';
 
-const LANGUAGE_COOKIE = 'NEXT_LOCALE';
+const LANGUAGE_COOKIE = 'X-Next-Locale';
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
@@ -31,11 +31,11 @@ export function middleware(request: NextRequest) {
 
   if (url.pathname.startsWith('/en')) {
     const response = NextResponse.next();
-    response.cookies.set(LANGUAGE_COOKIE, 'en');
+    response.headers.set(LANGUAGE_COOKIE, 'en');
     return response;
   } else {
     const response = NextResponse.next();
-    response.cookies.set(LANGUAGE_COOKIE, 'ru');
+    response.headers.set(LANGUAGE_COOKIE, 'ru');
     return response;
   }
 }

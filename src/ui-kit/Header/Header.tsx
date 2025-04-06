@@ -27,10 +27,18 @@ export const Header = () => {
           />
         </span>
         <div className={styles.links}>
-          <Link href={languagePrefix + '/'} className={styles.link}>
+          <Link
+            href={languagePrefix + '/'}
+            prefetch={false}
+            className={styles.link}
+          >
             {t('home')}
           </Link>
-          <Link href={languagePrefix + '/help'} className={styles.link}>
+          <Link
+            href={languagePrefix + '/help'}
+            prefetch={false}
+            className={styles.link}
+          >
             {t('support')}
           </Link>
           {/* <Link href={languagePrefix + '/updates'} className={styles.link}>
