@@ -1,15 +1,14 @@
 'use server';
 
-import {cookies} from 'next/headers';
+import {revalidatePath} from 'next/cache';
+import {cookies, headers} from 'next/headers';
 
 // In this example the locale is read from a cookie. You could alternatively
 // also read it from a database, backend service, or any other source.
-const LANGUAGE_COOKIE = 'NEXT_LOCALE';
+const LANGUAGE_COOKIE = 'X-Next-Locale';
 
 export async function getUserLocale() {
-  return (await cookies()).get(LANGUAGE_COOKIE)?.value || 'ru';
+  return (await headers()).get(LANGUAGE_COOKIE) || 'ru';
 }
 
-export async function setUserLocale(locale: 'ru' | 'en') {
-  (await cookies()).set(LANGUAGE_COOKIE, locale);
-}
+export async function setUserLocale(locale: 'ru' | 'en') {}

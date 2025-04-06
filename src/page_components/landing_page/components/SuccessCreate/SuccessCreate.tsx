@@ -1,7 +1,10 @@
 'use client';
 
 import styles from './SuccessCreate.module.scss';
+import {DonateModal} from '@/components/DonateModal/DonateModal';
+import {useLocale} from '@/hooks/useLocale';
 import {useShare} from '@/hooks/useShare';
+import {useModal} from '@/providers/ModalProvider/useModal';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {Button} from '@/ui-kit/Button/Button';
 import {Input} from '@/ui-kit/Input/Input';
@@ -18,12 +21,13 @@ type Props = {
 export const SuccessCreate = ({setHref, href}: Props) => {
   const {showSnack} = useSnackbar();
   const t = useTranslations('successScreen');
-
+  const locale = useLocale();
   const {share, isCanShare} = useShare({
     url: href,
     title: 'OneTimeLink',
     text: t('одноразовая_ссылка'),
   });
+  const {createModal} = useModal();
   const onCopy = () => {
     emitYmEvent('copyButtonClick');
     navigator.clipboard.writeText(href);
@@ -40,6 +44,15 @@ export const SuccessCreate = ({setHref, href}: Props) => {
     const url = new URL(href);
     return `${url.host + url.pathname}`;
   }, [href]);
+
+  const onDonateButtonClick = () => {
+    emitYmEvent('clickDonate');
+    createModal({
+      content: <DonateModal />,
+      title: 'Поддержать проект 🎁',
+      subtitle: '',
+    });
+  };
 
   return (
     <div className={styles.wrapper} data-testid="successScreen">
@@ -63,6 +76,16 @@ export const SuccessCreate = ({setHref, href}: Props) => {
       >
         {t('скопировать_ссылку')}
       </Button>
+      {locale === 'ru' && (
+        <Button
+          className={styles.button}
+          onClick={onDonateButtonClick}
+          size="xl"
+          color="gray"
+        >
+          Поддержать проект
+        </Button>
+      )}
       {isCanShare && (
         <Button
           onClick={onShare}

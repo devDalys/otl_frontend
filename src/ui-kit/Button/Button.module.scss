@@ -29,6 +29,10 @@
     color: var(--surface-accent);
   }
 
+  &.gray {
+    background: var(--stroke-secondary);
+    color: var(--stroke-accent);
+  }
   &:disabled {
     opacity: 0.4;
   }

@@ -3,7 +3,6 @@ import HtmlLangLayout from '@/layouts/HtmlLangLayout';
 import {GlobalProvider} from '@/providers/GlobalProvider';
 import {YaMetric} from '@/scripts/YaMetric';
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
 import localFont from 'next/font/local';
 
 const Gilroy = localFont({
@@ -25,16 +24,16 @@ const Gilroy = localFont({
   variable: '--gilroy-font',
 });
 
+export const dynamic = 'force-dynamic';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const messages = await getMessages({locale: 'ru'});
-
   return (
     <HtmlLangLayout>
-      <NextIntlClientProvider messages={messages} locale="en">
+      <NextIntlClientProvider>
         <body className={`${Gilroy.variable}`}>
           <YaMetric />
           <GlobalProvider>{children}</GlobalProvider>

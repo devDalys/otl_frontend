@@ -23,7 +23,8 @@ const cspHeader = `
     https://*.webvisor.com 
     http://webvisor.com 
     http://*.webvisor.com 
-    https://mc.yandex.ru;
+    https://mc.yandex.ru
+    https://yoomoney.ru;
   script-src 'self' blob: 'unsafe-inline' 'unsafe-eval' 
     https://*.onetimelink.ru 
     https://smartcaptcha.yandexcloud.net 

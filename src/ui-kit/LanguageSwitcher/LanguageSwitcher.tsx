@@ -19,9 +19,9 @@ export const LanguageSwitcher = () => {
     const path = prefix + pathName.replace('/en', '') || '/';
     emitYmEvent('switchLanguage');
     startTransition(() => {
-      setUserLocale(locale);
+      setUserLocale(value);
+      router.push(path);
     });
-    router.push(path);
   };
 
   return (

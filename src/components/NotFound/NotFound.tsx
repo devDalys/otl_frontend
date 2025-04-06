@@ -7,7 +7,7 @@ export const NotFoundPage = () => {
     <div className={styles.wrapper}>
       <div className={styles.notFound}>404 :(</div>
       <h1 className={styles.notFoundText}>Страница не найдена</h1>
-      <Link href="/">
+      <Link href="/" prefetch={false}>
         <Button size="xl" color="accent" className={styles.button}>
           На главную
         </Button>

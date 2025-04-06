@@ -34,7 +34,7 @@ export const OpenedContent = ({content}: Props) => {
       >
         {t('копировать')}
       </Button>
-      <Link href={href}>
+      <Link href={href} prefetch={false}>
         <Button size="xl" color="transparent" className={styles.createButton}>
           {t('создать_ссылку')}
         </Button>
