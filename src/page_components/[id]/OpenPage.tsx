@@ -2,6 +2,7 @@
 
 import styles from './OpenPage.module.scss';
 import {api} from '@/api/api';
+import {useLocale} from '@/hooks/useLocale';
 import {OpenedContent} from '@/page_components/[id]/components/OpenedContent/OpenedContent';
 import {useSnackbar} from '@/providers/SnackbarProvider/useSnackbar';
 import {SuccessResponse} from '@/types/responses';
@@ -34,6 +35,7 @@ export const OpenPage = ({withPassword, id}: Props) => {
   const [content, setContent] = useState('');
   const t = useTranslations('openScreen');
   const f = useTranslations('form');
+  const locale = useLocale();
   const {showSnack} = useSnackbar();
   const {control, handleSubmit, reset} = useForm({
     resolver: yupResolver(schema(f)),
@@ -72,6 +74,13 @@ export const OpenPage = ({withPassword, id}: Props) => {
       {!withPassword && <h1 className={styles.h1}>{t('инструкция')}</h1>}
       {withPassword && <h1 className={styles.h1}>{t('введите_пароль')}</h1>}
       <h2 className={styles.h2}>{t('предупреждение')}</h2>
+      <span className={styles.termsOfUse}>
+        {t.rich('terms', {
+          href: (chunks) => (
+            <a href={locale === 'en' ? '/en/terms' : '/terms'}>{chunks}</a>
+          ),
+        })}
+      </span>
       {withPassword && (
         <form
           className={styles.form}

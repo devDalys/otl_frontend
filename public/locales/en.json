@@ -38,7 +38,8 @@
     "1 неделя": "1 week",
     "1 месяц": "1 month",
     "1 год": "1 year",
-    "Неограниченно": "Unlimited"
+    "Неограниченно": "Unlimited",
+    "terms": "By using the service, you agree to the <href>rules of use</href>."
   },
   "faq": {
     "вопросы_и_ответы": "Questions and Answers",
@@ -111,7 +112,8 @@
     "создать_ссылку": "Create new link",
     "введите_пароль": "Enter password to view the contents",
     "пароль": "Password",
-    "уведомление": "Contents copied"
+    "уведомление": "Contents copied",
+    "terms": "By using the service, you agree to the <href>rules of use</href>."
   },
   "notFoundSlug": {
     "ошибка": "Link not found",
