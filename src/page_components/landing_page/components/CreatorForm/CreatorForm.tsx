@@ -16,6 +16,7 @@ import {showError} from '@/utils/showError';
 import {emitYmEvent} from '@/utils/ymEvent';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useTranslations} from 'next-intl';
+import Link from 'next/link';
 import {useState, useTransition} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
@@ -174,6 +175,13 @@ export const CreatorForm = () => {
           )}
         />
       </div>
+      <span className={styles.termsOfUse}>
+        {t.rich('terms', {
+          href: (chunks) => (
+            <a href={locale === 'en' ? '/en/terms' : '/terms'}>{chunks}</a>
+          ),
+        })}
+      </span>
       <Button
         size="xl"
         color="accent"

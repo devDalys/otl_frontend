@@ -15,5 +15,15 @@
   }
 }
 .button {
-  margin-top: 20px;
+  margin-top: 12px;
+}
+
+.termsOfUse {
+  font-size: 14px;
+  margin-top: 12px;
+  color: var(--text-primary);
+
+  a {
+    color: var(--surface-accent);
+  }
 }
