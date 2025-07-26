@@ -4,6 +4,7 @@ import {
   initTracerError,
   initTracerErrorUploader,
   initTracerLog,
+  initTracerSessionUploader,
 } from '@apptracer/sdk';
 import {useLayoutEffect} from 'react';
 
@@ -21,6 +22,11 @@ export const Tracer = ({appToken}: Props) => {
         versionName: 'latest',
         versionCode: 1,
         appToken,
+      });
+      initTracerSessionUploader({
+        versionName: 'latest',
+        versionCode: 1,
+        appToken: appToken,
       });
     }
   }, []);
