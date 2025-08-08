@@ -4,7 +4,7 @@ type Messages = typeof ru;
 declare global {
   interface Window {
     ym: any;
-    yaContextCb?: Array<any>;
+    yaContextCb?: Array<() => void>;
   }
   interface IntlMessages extends Messages {}
 }
