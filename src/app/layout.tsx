@@ -1,4 +1,5 @@
 import './globals.scss';
+import {YaFloor} from '@/components/Ads/Yandex/YaFloor';
 import HtmlLangLayout from '@/layouts/HtmlLangLayout';
 import {GlobalProvider} from '@/providers/GlobalProvider';
 import {YaMetric} from '@/scripts/YaMetric';
@@ -36,6 +37,7 @@ export default async function RootLayout({
       <NextIntlClientProvider>
         <body className={`${Gilroy.variable}`}>
           <YaMetric />
+          <YaFloor />
           <GlobalProvider>{children}</GlobalProvider>
         </body>
       </NextIntlClientProvider>
