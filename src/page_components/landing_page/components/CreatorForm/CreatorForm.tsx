@@ -111,6 +111,13 @@ export const CreatorForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <div className={styles.warning}>
+        Сайт закрывается. К сожалению, основная его аудитория использует сайт не
+        по назначению, поэтому мной было принято решение приостановить его
+        деятельность. Сайт будет доступен для открытия ссылок примерно месяц, а
+        после закроется навсегда. По всем вопросам можно обратиться в поддержку,
+        постараюсь ответить.
+      </div>
       <Controller
         name="content"
         control={control}
@@ -189,6 +196,7 @@ export const CreatorForm = () => {
         isLoading={isLoading}
         className={styles.button}
         testId="createButton"
+        disabled={true}
       >
         {t('create')}
       </Button>
